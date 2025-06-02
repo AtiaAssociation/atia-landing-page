@@ -3,6 +3,8 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import Image from "next/image"
+import logo from "@/public/images/logo.png"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -14,19 +16,16 @@ export function Header() {
     { name: "Événements", href: "#events" },
     { name: "Bureau Exécutif", href: "#team" },
     { name: "Adhésion", href: "#membership" },
-    { name: "Contact", href: "#contact" }
+    // { name: "Contact", href: "#contact" }
   ]
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">A</span>
-            </div>
-            <span className="font-bold text-xl text-gray-900">ATIA</span>
+            <Image src={logo} alt="Logo" width={40} height={40} />
           </div>
 
           {/* Desktop Navigation */}
@@ -40,14 +39,20 @@ export function Header() {
                 {item.name}
               </a>
             ))}
+          {/* CTA Button */}
+
+            <Button className="border-1 border-black bg-white hover:bg-white cursor-pointer text-black font-semibold">
+                <a
+                key="contact"
+                href="#contact"
+                className="text-gray-700 hover:text-orange-600 transition-colors duration-200 font-medium"
+              >
+                Contact
+              </a>
+            </Button>
+          
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:block">
-            <Button className="bg-orange-600 hover:bg-orange-700 text-white">
-              Adhérer maintenant
-            </Button>
-          </div>
 
           {/* Mobile Menu Button */}
           <button

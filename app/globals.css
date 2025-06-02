@@ -90,6 +90,8 @@
   animation: pulse-soft 4s ease-in-out infinite;
 }
 
+
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
@@ -244,4 +246,8 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.container {
+  @apply sm:max-w-[90vw] mx-auto  mx-auto ;
 }

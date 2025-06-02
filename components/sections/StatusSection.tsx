@@ -63,7 +63,7 @@ export function StatsSection() {
                   </div>
                   <div className={`text-4xl font-bold ${stat.color} mb-2`}>
                     <CounterAnimation value={stat.value} />
-                    {stat.value >= 1000 ? '+' : stat.value >= 50 ? '+' : ''}
+                    {stat.value >= 1000 ? '+' : stat.value >= 50 ? '+' : ''}  
                   </div>
                   <p className="text-gray-600 font-medium">{stat.label}</p>
                 </CardContent>

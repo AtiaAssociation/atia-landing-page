@@ -12,7 +12,7 @@ import Image from "next/image"
 
 export function ContactSection() {
   return (
-    <section className="py-20 bg-gradient-to-br from-orange-50 to-blue-50 relative overflow-hidden">
+    <section id="contact" className="py-20 bg-gradient-to-br from-orange-50 to-blue-50 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-32 h-32 bg-orange-400 rounded-full blur-3xl"></div>
