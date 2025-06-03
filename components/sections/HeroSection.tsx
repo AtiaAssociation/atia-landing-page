@@ -1,20 +1,18 @@
 // components/sections/hero.tsx
-"use client"
-import { Button } from "@/components/ui/button"
-import { FadeIn } from "@/components/animations/fade-in"
-import { SlideIn } from "@/components/animations/slide-in"
-import { motion } from "framer-motion"
-import heroSection from "@/public/images/heroSectionImg.png"
-import Image from "next/image"
-import { CounterAnimation } from "../animations/counter-animation"
+"use client";
+import { Button } from "@/components/ui/button";
+import { FadeIn } from "@/components/animations/fade-in";
+import { SlideIn } from "@/components/animations/slide-in";
+import { motion } from "framer-motion";
+import heroSection from "@/public/images/heroSectionImg.png";
+import Image from "next/image";
+import { CounterAnimation } from "../animations/counter-animation";
 import { MdOutlineMail } from "react-icons/md";
 import { FaArrowRight } from "react-icons/fa";
 
-
-
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
@@ -22,7 +20,7 @@ export function HeroSection() {
         {/* <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse delay-2000"></div> */}
       </div>
 
-      <div className="container  py-32 relative z-10">
+      <div className="container py-32 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="space-y-8">
@@ -37,20 +35,34 @@ export function HeroSection() {
 
             <SlideIn delay={0.4}>
               <p className=" text-[17px] text-gray-600 leading-relaxed max-w-lg">
-               <span className="font-bold">ATIA</span> est une association à but non lucratif, fondée en <span className="font-bold">2005</span> par le Prof.<span className="font-bold">Khaled GHEDIRA</span>. 
-                Elle a pour mission de promouvoir la recherche et le développement de l'intelligence artificielle.
+                <span className="font-bold">ATIA</span> est une association à
+                but non lucratif, fondée en{" "}
+                <span className="font-bold">2005</span> par le Prof.
+                <span className="font-bold">Khaled GHEDIRA</span>. Elle a pour
+                mission de promouvoir la recherche et le développement de
+                l'intelligence artificielle.
               </p>
             </SlideIn>
 
             <SlideIn delay={0.6}>
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="relative border py-2 px-3 rounded-md border-gray-300 w-[30vw] ">
-<MdOutlineMail size={20} className="absolute left-2 top-1/2 tranform -translate-y-1/2 top-0"/>
-               <input type="text" placeholder="Entrez votre email" className="pl-7   outline-none  px-5" />
+                  <MdOutlineMail
+                    size={20}
+                    className="absolute left-2 top-1/2 tranform -translate-y-1/2 top-0"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Entrez votre email"
+                    className="pl-7   outline-none  px-5"
+                  />
                 </div>
-                <Button  variant="outline" className=" bg-orange-400 hover:bg-orange-350 px-8 py-5 text-md text-white hover:text-white flex items-center gap-4">
+                <Button
+                  variant="outline"
+                  className=" bg-orange-400 hover:bg-orange-350 px-8 py-5 text-md text-white hover:text-white flex items-center gap-4"
+                >
                   Voir nos événements
-                  <FaArrowRight size={15}/>
+                  <FaArrowRight size={15} />
                 </Button>
               </div>
             </SlideIn>
@@ -58,16 +70,31 @@ export function HeroSection() {
             <SlideIn delay={0.8}>
               <div className="flex items-center space-x-8 pt-8">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-600"> <CounterAnimation value={300} />+</div>
-                  <div className="text-sm text-gray-600">Thèses de doctorat</div>
+                  <div className="text-3xl font-bold text-orange-600">
+                    {" "}
+                    <CounterAnimation value={300} />+
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Thèses de doctorat
+                  </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600"> <CounterAnimation value={1500} />+</div>
-                  <div className="text-sm text-gray-600">Articles scientifiques</div>
+                  <div className="text-3xl font-bold text-blue-600">
+                    {" "}
+                    <CounterAnimation value={1500} />+
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Articles scientifiques
+                  </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600"> <CounterAnimation value={15} />+</div>
-                  <div className="text-sm text-gray-600">Années d'expérience</div>
+                  <div className="text-3xl font-bold text-purple-600">
+                    {" "}
+                    <CounterAnimation value={15} />+
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    Années d'expérience
+                  </div>
                 </div>
               </div>
             </SlideIn>
@@ -83,14 +110,10 @@ export function HeroSection() {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 1, delay: 1.2 }}
-                 
                   >
-                   
-                    <Image src={heroSection} alt="Map"  />
-                   
+                    <Image src={heroSection} alt="Map" />
                   </motion.div>
                 </div>
-
               </div>
             </FadeIn>
           </div>
@@ -108,5 +131,5 @@ export function HeroSection() {
         </div>
       </motion.div> */}
     </section>
-  )
+  );
 }

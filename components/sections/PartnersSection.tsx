@@ -1,15 +1,15 @@
-"use client"
-import { FadeIn } from "@/components/animations/fade-in"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import { useState } from "react"
-import bank from "@/public/images/partners/bank.png"
-import ccft from "@/public/images/partners/ccft.png"
-import giz from "@/public/images/partners/giz.png"
-import factory from "@/public/images/partners/factory.png"
-import startup from "@/public/images/partners/startup.png"
-import uni from "@/public/images/partners/uni.png"
-import garage from "@/public/images/partners/garage.png"
+"use client";
+import { FadeIn } from "@/components/animations/fade-in";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useState } from "react";
+import bank from "@/public/images/partners/bank.png";
+import ccft from "@/public/images/partners/ccft.png";
+import giz from "@/public/images/partners/giz.png";
+import factory from "@/public/images/partners/factory.png";
+import startup from "@/public/images/partners/startup.png";
+import uni from "@/public/images/partners/uni.png";
+import garage from "@/public/images/partners/garage.png";
 
 export function PartnersSection() {
   const partners = [
@@ -19,16 +19,16 @@ export function PartnersSection() {
     { name: "CERT", logo: ccft },
     { name: "Bank", logo: bank },
     { name: "GIZ", logo: giz },
-    { name: "STARTUP", logo: startup }
-  ]
+    { name: "STARTUP", logo: startup },
+  ];
 
   // Duplicate partners for seamless loop
-  const duplicatedPartners = [...partners, ...partners]
-  
-  const [isHovered, setIsHovered] = useState(false)
+  const duplicatedPartners = [...partners, ...partners];
+
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section id="partners" className="py-5 pb-20 overflow-hidden">
+    <section id="partners" className=" py-24 overflow-hidden">
       <div className="">
         <FadeIn>
           <div className="text-center mb-16">
@@ -40,8 +40,8 @@ export function PartnersSection() {
         </FadeIn>
 
         {/* Seamless Animated Carousel */}
-        <div className="relative">
-          <div 
+        <div className=" relative">
+          <div
             className="bg-gray-50 py-12 relative overflow-hidden rounded-xl"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -54,10 +54,10 @@ export function PartnersSection() {
                 duration: 25,
                 repeat: Infinity,
                 ease: "linear",
-                repeatType: "loop"
+                repeatType: "loop",
               }}
               style={{
-                animationPlayState: isHovered ? 'paused' : 'running'
+                animationPlayState: isHovered ? "paused" : "running",
               }}
               className="flex gap-20 items-center"
             >
@@ -65,17 +65,17 @@ export function PartnersSection() {
                 <motion.div
                   key={`${partner.name}-${index}`}
                   className="flex-shrink-0  relative"
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.1,
-                    y: -5
+                    y: -5,
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
                   <div className="flex flex-col items-center justify-center h-full rounded-lg transition-all duration-300">
-                    <Image 
-                      src={partner.logo} 
+                    <Image
+                      src={partner.logo}
                       alt={partner.name}
-                      width={300}
+                      width={250}
                       height={120}
                       className="object-contain"
                     />
@@ -91,5 +91,5 @@ export function PartnersSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

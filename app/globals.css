@@ -52,7 +52,8 @@
 
 /* Custom animations */
 @keyframes gradient-x {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0%);
   }
   50% {
@@ -61,7 +62,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -70,7 +72,8 @@
 }
 
 @keyframes pulse-soft {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -89,8 +92,6 @@
 .animate-pulse-soft {
   animation: pulse-soft 4s ease-in-out infinite;
 }
-
-
 
 /* Smooth scrolling */
 html {
@@ -178,9 +179,10 @@ html {
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+
+  --primary: #ea580c;
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
+  --secondary: #44489a;
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
@@ -249,5 +251,5 @@ html {
 }
 
 .container {
-  @apply sm:max-w-[90vw] mx-auto  mx-auto ;
+  @apply sm:max-w-[90vw] mx-auto px-5 sm:px-0;
 }
