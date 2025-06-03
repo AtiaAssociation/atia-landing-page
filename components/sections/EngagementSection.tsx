@@ -53,7 +53,7 @@ const FloatingElement = ({ children, delay = 0 }: Props) => {
 };
 
 export default function EngagementSection() {
-  const [hoveredFeature, setHoveredFeature] = useState(null);
+  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
 
   const features = [
     {
@@ -79,8 +79,8 @@ export default function EngagementSection() {
   return (
     <div className="relative z-10 ">
       <FadeIn delay={500}>
-        <div className="pt-32 pb-20  container ">
-          <div className="grid lg:grid-cols-2 gap-16  items-center">
+        <div className="pt-32 pb-20  container  ">
+          <div className="grid lg:grid-cols-2 gap-16  items-center ">
             {/* Left Side – Enhanced Text Content */}
             <div className="space-y-8">
               <div className="space-y-6">
@@ -118,7 +118,7 @@ export default function EngagementSection() {
                     <SlideIn key={index} delay={feature.delay}>
                       <div
                         key={index}
-                        className={`p-4 rounded-2xl bg-white/60 backdrop-blur-sm border border-white/50 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-1 ${
+                        className={`h-full p-4 rounded-2xl bg-white/60 backdrop-blur-sm border border-white/50 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-1 flex flex-col ${
                           hoveredFeature === index
                             ? "ring-2 ring-blue-500/50 bg-white/80"
                             : ""
@@ -126,17 +126,19 @@ export default function EngagementSection() {
                         onMouseEnter={() => setHoveredFeature(index)}
                         onMouseLeave={() => setHoveredFeature(null)}
                       >
-                        <Icon
-                          className={`w-8 h-8 mb-3 transition-colors duration-300 ${
-                            hoveredFeature === index
-                              ? "text-blue-600"
-                              : "text-gray-600"
-                          }`}
-                        />
-                        <h4 className="font-bold text-gray-900 mb-1">
-                          {feature.title}
-                        </h4>
-                        <p className="text-sm text-gray-600">
+                        <div className="flex-none">
+                          <Icon
+                            className={`w-8 h-8 mb-3 transition-colors duration-300 ${
+                              hoveredFeature === index
+                                ? "text-blue-600"
+                                : "text-gray-600"
+                            }`}
+                          />
+                          <h4 className="font-bold text-gray-900 mb-1">
+                            {feature.title}
+                          </h4>
+                        </div>
+                        <p className="text-sm text-gray-600 flex-grow">
                           {feature.description}
                         </p>
                       </div>
@@ -158,24 +160,24 @@ export default function EngagementSection() {
             </div>
 
             {/* Right Side – Enhanced Visual */}
-            <SlideIn delay={0.9}>
+            <SlideIn delay={0.9} className="overflow-hidden">
               <div className="relative flex justify-center lg:justify-end lg:pr-10 ">
                 <div className="relative">
                   {/* Animated Rings */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div
-                      className="w-[420px] h-[420px] border-2 border-blue-300/30 rounded-full animate-spin"
+                      className="w-[400px] h-[400px] border-2 border-blue-300/30 rounded-full animate-spin"
                       style={{ animationDuration: "20s" }}
                     ></div>
                     <div
-                      className="absolute w-96 h-96 border-2 border-purple-300/30 rounded-full animate-spin"
+                      className="absolute w-[380px] h-[380px] border-2 border-purple-300/30 rounded-full animate-spin"
                       style={{
                         animationDuration: "15s",
                         animationDirection: "reverse",
                       }}
                     ></div>
                     <div
-                      className="absolute w-[370px] h-[370px] border-2 border-cyan-300/30 rounded-full animate-spin"
+                      className="absolute w-[350px] h-[350px] border-2 border-cyan-300/30 rounded-full animate-spin"
                       style={{ animationDuration: "25s" }}
                     ></div>
                   </div>
@@ -183,8 +185,8 @@ export default function EngagementSection() {
                   <Image
                     src={statusImg}
                     alt="engagement image"
-                    width={350}
-                    height={350}
+                    width={300}
+                    height={300}
                   />
 
                   {/* Floating Tech Icons */}

@@ -18,7 +18,9 @@ import { FadeIn } from "../animations/fade-in";
 
 export const EventsSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const SLIDE_DURATION = 5000; // 5 seconds in milliseconds
 
   const events = [
     {
@@ -64,14 +66,22 @@ export const EventsSection = () => {
 
   // Auto-advance slides
   useEffect(() => {
-    if (!isPlaying) return;
+    if (isHovered) return;
 
+    const startTime = Date.now();
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % events.length);
-    }, 5000); // Change slide every 5 seconds
+      const elapsed = Date.now() - startTime;
+      const newProgress = (elapsed / SLIDE_DURATION) * 100;
+      setProgress(Math.min(newProgress, 100));
+
+      if (elapsed >= SLIDE_DURATION) {
+        setCurrentSlide((prev) => (prev + 1) % events.length);
+        setProgress(0);
+      }
+    }, 10); // Update progress every 10ms for smooth animation
 
     return () => clearInterval(interval);
-  }, [isPlaying, events.length]);
+  }, [isHovered, events.length, currentSlide]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % events.length);
@@ -83,10 +93,6 @@ export const EventsSection = () => {
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
-  };
-
-  const toggleAutoplay = () => {
-    setIsPlaying(!isPlaying);
   };
 
   const currentEvent = events[currentSlide];
@@ -114,7 +120,10 @@ export const EventsSection = () => {
         <div className="max-w-6xl mx-auto">
           <div className="relative">
             {/* Main Event Card */}
-            <div className="relative overflow-hidden">
+            <div className="relative overflow-hidden"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -281,20 +290,6 @@ export const EventsSection = () => {
                   />
                 ))}
               </div>
-
-              {/* Play/Pause Button */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={toggleAutoplay}
-                className="w-10 h-10 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-gray-700 transition-colors"
-              >
-                {isPlaying ? (
-                  <Pause className="w-5 h-5" />
-                ) : (
-                  <Play className="w-5 h-5 ml-0.5" />
-                )}
-              </motion.button>
             </div>
 
             {/* Progress Bar */}
@@ -303,14 +298,11 @@ export const EventsSection = () => {
                 className="h-full bg-gradient-to-r from-orange-500 to-red-500"
                 initial={{ width: "0%" }}
                 animate={{
-                  width: isPlaying
-                    ? "100%"
-                    : `${((currentSlide + 1) / events.length) * 100}%`,
+                  width: isHovered ? `${progress}%` : `${progress}%`,
                 }}
                 transition={{
-                  duration: isPlaying ? 5 : 0.3,
+                  duration: 0.1,
                   ease: "linear",
-                  repeat: isPlaying ? Infinity : 0,
                 }}
               />
             </div>

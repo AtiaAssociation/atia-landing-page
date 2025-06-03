@@ -21,7 +21,7 @@ export function HeroSection() {
       </div>
 
       <div className="container py-32 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left content */}
           <div className="space-y-8">
             <FadeIn delay={0.2}>
@@ -46,7 +46,7 @@ export function HeroSection() {
 
             <SlideIn delay={0.6}>
               <div className="flex flex-col sm:flex-row gap-4">
-                <div className="relative border py-2 px-3 rounded-md border-gray-300 w-[30vw] ">
+                <div className="relative border py-2 px-3 rounded-md border-gray-300 sm:w-[30vw] ">
                   <MdOutlineMail
                     size={20}
                     className="absolute left-2 top-1/2 tranform -translate-y-1/2 top-0"

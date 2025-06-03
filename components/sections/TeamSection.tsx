@@ -5,82 +5,121 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { Linkedin, Mail, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaLinkedinIn } from "react-icons/fa";
-import fondateur from "@/public/images/bureau/fondateur.png";
+import khaled from "@/public/images/bureau/khaled.png"
+import amel from "@/public/images/bureau/amel.png"
+import bilel from "@/public/images/bureau/bilel.png"
+import chaker from "@/public/images/bureau/chaker.png"
+import farahKtata from "@/public/images/bureau/farahKtata.png"
+import fatma from "@/public/images/bureau/fatma.png"
+import houssemNouri from "@/public/images/bureau/houssemNouri.png"
+import najiba from "@/public/images/bureau/najiba.png"
+import olfaBelkahla from "@/public/images/bureau/olfaBelkahla.png"
+import radhwane from "@/public/images/bureau/radhwane.png"
+
 import Image from "next/image";
+import { AdhesionSection } from "./AdhesionSection";
 
 export default function TeamSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const teamMembers = [
     {
-      name: "Dr. Adel ALIMI",
-      role: "Président de l'ATIA",
+      name: "Pr. Khaled Ghédira",
+      role: "Fondateur de l'ATIA Président d'honneur",
+      job:"Président d'honneur",
       description:
         "Spécialiste en intelligence artificielle avec plus de 20 ans d'expérience dans le domaine",
-      image: fondateur,
+      image: khaled,
       linkedin: "#",
       email: "adel.alimi@example.com",
     },
     {
-      name: "Dr. Amel BORGI",
+      name: "Dr. Farah BARIKA KTATA",
       role: "Présidente ATIA",
+      job:"Maître Assistante ISSAT Sousse",
       description:
         "Experte Géoscience 2025 Société et leader reconnue dans l'innovation technologique",
-      image: fondateur,
+      image: farahKtata,
       linkedin: "#",
       email: "amel.borgi@example.com",
     },
     {
-      name: "Dr. Jihen MALEK",
-      role: "Secrétaire générale",
+      name: "Dr. Olfa Belkahla Driss",
+      role: "Responsable de la relation avec l'environnement académique ",
+      job:"Maître de Conférences - ESC",
       description:
         "Spécialiste en analyse et applications d'intelligence artificielle pour les entreprises",
-      image: fondateur,
+      image: olfaBelkahla,
       linkedin: "#",
       email: "jihen.malek@example.com",
     },
     {
-      name: "Dr. Farouk BOUALI",
-      role: "Trésorier",
+      name: "Dr. Fatma SIALA KALLEL",
+      role: "Responsable communication  ",
+      job:"Maître Assistante ISAMM",
       description:
         "Expert Géoscience 2025 Société avec une expertise en gestion financière et stratégique",
-      image: fondateur,
+      image: fatma,
       linkedin: "#",
       email: "farouk.bouali@example.com",
     },
     {
-      name: "Dr. Sarah AHMED",
-      role: "Directrice R&D",
+      name: "Pr. Najiba Bellaaj",
+      role: "Vice présidente ",
+      job:"Professeur ISI",
       description:
         "Chercheuse en machine learning et deep learning, spécialisée dans les réseaux de neurones",
-      image: fondateur,
+      image: najiba,
       linkedin: "#",
       email: "sarah.ahmed@example.com",
     },
     {
-      name: "Dr. Mohamed HASSAN",
-      role: "Directeur Marketing",
+      name: "Dr. Bilel Marzouki",
+      role: "Responsable adhésion ",
+      job:" Maître assistant ENSI",
       description:
         "Expert en communication digitale et stratégies de développement technologique",
-      image: fondateur,
+      image: bilel,
       linkedin: "#",
       email: "mohamed.hassan@example.com",
     },
     {
-      name: "Dr. Leila MANSOURI",
-      role: "Directrice Partenariats",
+      name: "Dr. Chaker Essid",
+      role: "Trésorier",
+      job:"Maître assistant FST",
       description:
         "Spécialisée dans les collaborations internationales et le développement de partenariats stratégiques",
-      image: fondateur,
+      image: chaker,
       linkedin: "#",
       email: "leila.mansouri@example.com",
     },
     {
-      name: "Dr. Youssef BEN ALI",
-      role: "Directeur Technique",
+      name: "Dr. Amel Laabidi",
+      role: "Sécrétaire Général Adjoint ",
+      job:"Consultant BH",
       description:
         "Architecte logiciel senior avec une expertise en systèmes distribués et cloud computing",
-      image: fondateur,
+      image: amel,
+      linkedin: "#",
+      email: "youssef.benali@example.com",
+    },
+    {
+      name: "Dr. Radhwane Ben Rhouma",
+      role: "Consultant PRICE",
+      job:"Responsable des activités internes",
+      description:
+        "Architecte logiciel senior avec une expertise en systèmes distribués et cloud computing",
+      image: radhwane,
+      linkedin: "#",
+      email: "youssef.benali@example.com",
+    },
+    {
+      name: "Dr. Houssem Nouri",
+      role: "Responsable de la planification",
+      job:"Maître assistant FSEG",
+      description:
+        "Architecte logiciel senior avec une expertise en systèmes distribués et cloud computing",
+      image: houssemNouri,
       linkedin: "#",
       email: "youssef.benali@example.com",
     },
@@ -179,7 +218,7 @@ export default function TeamSection() {
                     ease: "easeOut",
                   }}
                 >
-                  <Card className="bg-gray-800 pt-0 border-gray-700 hover:border-orange-500/50 transition-all duration-500 h-full group overflow-hidden">
+                  <Card className="bg-gray-800 py-0 border-gray-700 hover:border-orange-500/50 transition-all duration-500 h-full group overflow-hidden">
                     <CardContent className="p-0 h-full flex flex-col">
                       {/* Image Container with Blur Overlay */}
                       <div className="relative overflow-hidden">
@@ -241,11 +280,18 @@ export default function TeamSection() {
                             {member.name}
                           </motion.h3>
                           <motion.p
-                            className="text-orange-400 font-medium mb-3 group-hover:text-orange-300 transition-colors duration-300"
+                            className="text-orange-400 font-medium  group-hover:text-orange-300 transition-colors duration-300"
                             whileHover={{ x: 5 }}
                             transition={{ duration: 0.2 }}
                           >
                             {member.role}
+                          </motion.p>
+                          <motion.p
+                            className="text-orange-100 font-medium mb-3 group-hover:text-orange-300 transition-colors duration-300"
+                            whileHover={{ x: 5 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            {member.job}
                           </motion.p>
                           <p className="text-gray-300 text-sm leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
                             {member.description}
@@ -282,7 +328,7 @@ export default function TeamSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-12"
         >
-          <div className="bg-gradient-to-r from-orange-600/10 to-blue-600/10 rounded-2xl p-6 border border-gray-700/50 backdrop-blur-sm">
+          <div className="bg-gradient-to-r from-orange-600/10 to-blue-600/10 rounded-2xl p-6 border border-gray-700/50 backdrop-blur-sm mb-10">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <h4 className="text-2xl font-bold text-orange-400">
@@ -302,6 +348,7 @@ export default function TeamSection() {
           </div>
         </motion.div>
       </div>
+      <AdhesionSection/>
     </section>
   );
 }

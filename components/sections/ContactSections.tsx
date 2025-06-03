@@ -7,7 +7,8 @@ import { FadeIn } from "@/components/animations/fade-in"
 import { SlideIn } from "@/components/animations/slide-in"
 import { StaggerContainer } from "@/components/animations/stagger-container"
 import { StaggerItem } from "@/components/animations/stagger-item"
-import { Mail, Phone, MapPin, Facebook, Linkedin } from "lucide-react"
+import { Mail, Phone, MapPin, Facebook, Linkedin, Globe, Users } from "lucide-react"
+import contactImg from "@/public/images/contactImg.png"
 import Image from "next/image"
 
 export function ContactSection() {
@@ -17,6 +18,7 @@ export function ContactSection() {
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-32 h-32 bg-orange-400 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-purple-400 rounded-full blur-2xl"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -24,9 +26,11 @@ export function ContactSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Nos Contact
           </h2>
+          <div className="w-32 h-1 bg-gradient-to-r from-orange-600 to-blue-600 mx-auto "></div>
+
         </FadeIn>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 items-end ">
           {/* Contact Information */}
           <SlideIn direction="left" className="space-y-8">
             <div className="bg-white rounded-2xl p-8 shadow-xl">
@@ -102,62 +106,79 @@ export function ContactSection() {
             </div>
           </SlideIn>
 
-          {/* Contact Cards and Visual */}
-          <SlideIn direction="right" className="space-y-8">
-            {/* Business Cards Display */}
-            <div className="relative">
-              <div className="bg-white rounded-2xl p-8 shadow-xl">
-                <div className="grid grid-cols-2 gap-4">
-                  {/* ATIA Card */}
-                  <div className="bg-gradient-to-br from-orange-400 to-orange-600 p-6 rounded-xl text-white transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                    <div className="text-sm font-semibold mb-2">ATIA</div>
-                    <div className="text-xs opacity-90">
-                      Association Tunisienne pour<br />
-                      l'Intelligence Artificielle
-                    </div>
-                    <div className="mt-4 text-xs">
-                      contact@atia.org.tn<br />
-                      (+216) 25 80 61 90
-                    </div>
+          {/* Creative Cards Display */}
+          <SlideIn direction="right" className="space-y-8 flex justify-center lg:justify-end">
+            {/* Floating Cards Container */}
+            <div className="relative ">
+              <Image src={contactImg} alt="contact image" width={500} height={500}/>
+              {/* Large Orange Circle Background */}
+              {/* <div className="absolute top-4 right-8 w-72 h-72 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full opacity-90"></div> */}
+              
+              {/* Facebook Card */}
+              {/* <div className="absolute top-8 left-4 bg-white rounded-xl shadow-lg p-4 w-64 transform rotate-3 hover:rotate-0 transition-all duration-300 hover:shadow-xl z-20">
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
+                    <Facebook className="w-5 h-5 text-white" />
                   </div>
+                  <span className="font-semibold text-gray-900">Facebook</span>
+                </div>
+                <h4 className="font-bold text-sm text-gray-900 mb-2">
+                  ATIA TUNISIE
+                </h4>
+                <p className="text-xs text-gray-600 mb-3">
+                  L'ASSOCIATION TUNISIENNE POUR L'INTELLIGENCE ARTIFICIELLE EST UNE ORGANISATION À BUT NON LUCRATIF...
+                </p>
+                <div className="flex items-center space-x-2">
+                  <div className="flex -space-x-1">
+                    <div className="w-6 h-6 bg-blue-400 rounded-full border-2 border-white"></div>
+                    <div className="w-6 h-6 bg-green-400 rounded-full border-2 border-white"></div>
+                    <div className="w-6 h-6 bg-purple-400 rounded-full border-2 border-white"></div>
+                  </div>
+                  <span className="text-xs text-gray-500">+847 followers</span>
+                </div>
+              </div> */}
 
-                  {/* IEEE Card */}
-                  <div className="bg-gradient-to-br from-blue-500 to-blue-700 p-6 rounded-xl text-white transform -rotate-2 hover:rotate-0 transition-transform duration-300">
-                    <div className="text-sm font-semibold mb-2">IEEE</div>
-                    <div className="text-xs opacity-90">
-                      Institute of Electrical and<br />
-                      Electronics Engineers
-                    </div>
-                    <div className="mt-4 text-xs">
-                      Partnership Program<br />
-                      International Standards
-                    </div>
+              {/* ATIA Card */}
+              {/* <div className="absolute top-32 right-4 bg-white rounded-xl shadow-lg p-6 w-56 transform -rotate-2 hover:rotate-0 transition-all duration-300 hover:shadow-xl z-10">
+                <div className="flex items-center space-x-2 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-blue-500 rounded-lg flex items-center justify-center">
+                    <Globe className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900">ATIA</h4>
+                    <p className="text-xs text-gray-600">Tunisia AI Association</p>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* QR Code Section */}
-            <div className="bg-white rounded-2xl p-8 shadow-xl text-center">
-              <h4 className="text-xl font-bold text-gray-900 mb-4">
-                Scannez pour nous contacter
-              </h4>
-              <div className="bg-gray-100 p-6 rounded-xl inline-block">
-                <div className="w-32 h-32 bg-gray-300 rounded-lg flex items-center justify-center">
-                  {/* QR Code Placeholder */}
-                  <div className="grid grid-cols-8 gap-1">
-                    {Array.from({ length: 64 }, (_, i) => (
-                      <div
-                        key={i}
-                        className={`w-1 h-1 ${Math.random() > 0.5 ? 'bg-black' : 'bg-white'}`}
-                      />
-                    ))}
+                <div className="space-y-2 text-xs text-gray-600">
+                  <div className="flex items-center space-x-2">
+                    <Mail className="w-3 h-3" />
+                    <span>contact@atia.org.tn</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Phone className="w-3 h-3" />
+                    <span>(+216) 25 80 61 90</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="w-3 h-3" />
+                    <span>ENIS, La Manouba</span>
                   </div>
                 </div>
+                <div className="mt-4 flex space-x-1">
+                  <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                </div>
               </div>
-              <p className="text-sm text-gray-600 mt-4">
-                Accès rapide à nos informations de contact
-              </p>
+
+              
+              <div className="absolute bottom-8 left-12 bg-blue-600 text-white p-3 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-300 z-30">
+                <Linkedin className="w-6 h-6" />
+              </div>
+
+
+              <div className="absolute top-16 right-16 w-4 h-4 bg-yellow-400 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
+              <div className="absolute bottom-16 left-8 w-3 h-3 bg-pink-400 rounded-full animate-pulse"></div>
+              <div className="absolute top-24 left-16 w-2 h-2 bg-purple-400 rounded-full animate-ping"></div> */}
             </div>
           </SlideIn>
         </div>
