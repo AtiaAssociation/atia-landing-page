@@ -8,7 +8,7 @@ export function Footer() {
           {/* Logo & Description */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">A</span>
               </div>
               <span className="font-bold text-xl">ATIA</span>
@@ -18,10 +18,10 @@ export function Footer() {
               le développement et la promotion de l'IA en Tunisie.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-orange-400 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-primary transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-orange-400 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-primary transition-colors">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -31,10 +31,10 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-lg mb-4">Liens rapides</h3>
             <ul className="space-y-2">
-              <li><a href="#about" className="text-gray-300 hover:text-orange-400 transition-colors">À propos</a></li>
-              <li><a href="#events" className="text-gray-300 hover:text-orange-400 transition-colors">Événements</a></li>
-              <li><a href="#team" className="text-gray-300 hover:text-orange-400 transition-colors">Équipe</a></li>
-              <li><a href="#contact" className="text-gray-300 hover:text-orange-400 transition-colors">Contact</a></li>
+              <li><a href="#about" className="text-gray-300 hover:text-primary transition-colors">À propos</a></li>
+              <li><a href="#events" className="text-gray-300 hover:text-primary transition-colors">Événements</a></li>
+              <li><a href="#team" className="text-gray-300 hover:text-primary transition-colors">Équipe</a></li>
+              <li><a href="#contact" className="text-gray-300 hover:text-primary transition-colors">Contact</a></li>
             </ul>
           </div>
 
@@ -43,15 +43,15 @@ export function Footer() {
             <h3 className="font-semibold text-lg mb-4">Contact</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
-                <MapPin size={16} className="text-orange-400" />
+                <MapPin size={16} className="text-primary" />
                 <span className="text-gray-300 text-sm">Campus Universitaire de la Manouba, CP 2010</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Phone size={16} className="text-orange-400" />
+                <Phone size={16} className="text-primary" />
                 <span className="text-gray-300 text-sm">(+216) 25 80 61 90</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Mail size={16} className="text-orange-400" />
+                <Mail size={16} className="text-primary" />
                 <span className="text-gray-300 text-sm">contact@atia.org.tn</span>
               </div>
             </div>

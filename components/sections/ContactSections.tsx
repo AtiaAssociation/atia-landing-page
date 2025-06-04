@@ -7,181 +7,178 @@ import { FadeIn } from "@/components/animations/fade-in"
 import { SlideIn } from "@/components/animations/slide-in"
 import { StaggerContainer } from "@/components/animations/stagger-container"
 import { StaggerItem } from "@/components/animations/stagger-item"
-import { Mail, Phone, MapPin, Facebook, Linkedin, Globe, Users } from "lucide-react"
+import { Mail, Phone, MapPin, Facebook, Linkedin, Globe, Users, ArrowRight } from "lucide-react"
 import contactImg from "@/public/images/contactImg.png"
 import Image from "next/image"
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-orange-50 to-blue-50 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-orange-400 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-purple-400 rounded-full blur-2xl"></div>
+    <section id="contact" className="py-20  bg-gradient-to-br from-orange-50/30 via-white to-blue-50/30 relative overflow-hidden">
+      {/* Enhanced Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-primary to-orange-400 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full blur-3xl"></div>
       </div>
       
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.15) 1px, transparent 0)`,
+        backgroundSize: '24px 24px'
+      }}></div>
+      
       <div className="container mx-auto px-4 relative z-10">
-        <FadeIn className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Nos Contact
+        <FadeIn className="text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary to-orange-400 rounded-2xl mb-6">
+            <Mail className="w-8 h-8 text-white" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent mb-4">
+            Nos Contacts
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-orange-600 to-blue-600 mx-auto "></div>
-
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-blue-600 mx-auto rounded-full mb-6"></div>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-6">
+            Rejoignez-nous dans notre mission de développer l'intelligence artificielle en Tunisie
+          </p>
         </FadeIn>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-end ">
-          {/* Contact Information */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Contact Information - Redesigned without card separation */}
           <SlideIn direction="left" className="space-y-8">
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                Contactez-nous
-              </h3>
+            <div className="relative">
+              {/* Subtle background glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/50 to-orange-50/50 rounded-3xl blur-xl"></div>
               
-              <StaggerContainer className="space-y-6">
-                <StaggerItem>
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-orange-100 p-3 rounded-lg">
-                      <MapPin className="w-6 h-6 text-orange-600" />
+              <div className="relative bg-white/70 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+                <div className="flex items-center mb-8">
+                  <div className="w-3 h-3 bg-primary rounded-full mr-3"></div>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    Contactez-nous
+                  </h3>
+                </div>
+                
+                <StaggerContainer className="space-y-3">
+                  <StaggerItem>
+                    <div className="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-white/60 transition-all duration-300">
+                      <div className="bg-gradient-to-br from-orange-100 to-orange-200 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <MapPin className="w-6 h-6 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-gray-900 mb-1">Adresse</h4>
+                        <p className="text-gray-600 leading-relaxed">
+                          ENIS, Campus Universitaire de la Manouba, CP 2010,<br />
+                          La Manouba - Tunis
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Adresse</h4>
-                      <p className="text-gray-600">
-                        ENIS, Campus Universitaire de la Manouba, CP 2010,<br />
-                        La Manouba - Tunis
-                      </p>
-                    </div>
-                  </div>
-                </StaggerItem>
+                  </StaggerItem>
 
-                <StaggerItem>
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-blue-100 p-3 rounded-lg">
-                      <Phone className="w-6 h-6 text-blue-600" />
+                  <StaggerItem>
+                    <div className="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-white/60 transition-all duration-300">
+                      <div className="bg-gradient-to-br from-blue-100 to-blue-200 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <Phone className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-gray-900 mb-1">Téléphone</h4>
+                        <p className="text-gray-600 font-mono">(+216) 25 80 61 90</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Téléphone</h4>
-                      <p className="text-gray-600">(+216) 25 80 61 90</p>
-                    </div>
-                  </div>
-                </StaggerItem>
+                  </StaggerItem>
 
-                <StaggerItem>
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-green-100 p-3 rounded-lg">
-                      <Mail className="w-6 h-6 text-green-600" />
+                  <StaggerItem>
+                    <div className="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-white/60 transition-all duration-300">
+                      <div className="bg-gradient-to-br from-green-100 to-green-200 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <Mail className="w-6 h-6 text-green-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-gray-900 mb-1">Email</h4>
+                        <p className="text-gray-600 font-mono">contact@atia.org.tn</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Email</h4>
-                      <p className="text-gray-600">contact@atia.org.tn</p>
-                    </div>
-                  </div>
-                </StaggerItem>
+                  </StaggerItem>
 
-                <StaggerItem>
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-purple-100 p-3 rounded-lg">
-                      <Facebook className="w-6 h-6 text-purple-600" />
+                  <StaggerItem>
+                    <div className="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-white/60 transition-all duration-300">
+                      <div className="bg-gradient-to-br from-purple-100 to-purple-200 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <Facebook className="w-6 h-6 text-purple-600" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-gray-900 mb-1">Facebook</h4>
+                        <p className="text-gray-600">
+                          Association Tunisienne pour l'Intelligence Artificielle
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Facebook</h4>
-                      <p className="text-gray-600">
-                        Association Tunisienne pour l'Intelligence Artificielle
-                      </p>
-                    </div>
-                  </div>
-                </StaggerItem>
-              </StaggerContainer>
+                  </StaggerItem>
+                </StaggerContainer>
 
-              <div className="mt-8 flex space-x-4">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg">
-                  <Facebook className="w-5 h-5 mr-2" />
-                  Facebook
-                </Button>
-                <Button variant="outline" className="border-orange-600 text-orange-600 hover:bg-orange-50 px-8 py-3 rounded-lg">
-                  <Linkedin className="w-5 h-5 mr-2" />
-                  LinkedIn
-                </Button>
+                {/* Enhanced Social Buttons */}
+                <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                  <Button className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <Facebook className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                    Suivez-nous
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                  <Button variant="outline" className="group border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-orange-400 hover:text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <Linkedin className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                    LinkedIn
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </div>
               </div>
             </div>
           </SlideIn>
 
-          {/* Creative Cards Display */}
-          <SlideIn direction="right" className="space-y-8 flex justify-center lg:justify-end">
-            {/* Floating Cards Container */}
-            <div className="relative ">
-              <Image src={contactImg} alt="contact image" width={500} height={500}/>
-              {/* Large Orange Circle Background */}
-              {/* <div className="absolute top-4 right-8 w-72 h-72 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full opacity-90"></div> */}
-              
-              {/* Facebook Card */}
-              {/* <div className="absolute top-8 left-4 bg-white rounded-xl shadow-lg p-4 w-64 transform rotate-3 hover:rotate-0 transition-all duration-300 hover:shadow-xl z-20">
-                <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-                    <Facebook className="w-5 h-5 text-white" />
-                  </div>
-                  <span className="font-semibold text-gray-900">Facebook</span>
-                </div>
-                <h4 className="font-bold text-sm text-gray-900 mb-2">
-                  ATIA TUNISIE
-                </h4>
-                <p className="text-xs text-gray-600 mb-3">
-                  L'ASSOCIATION TUNISIENNE POUR L'INTELLIGENCE ARTIFICIELLE EST UNE ORGANISATION À BUT NON LUCRATIF...
-                </p>
-                <div className="flex items-center space-x-2">
-                  <div className="flex -space-x-1">
-                    <div className="w-6 h-6 bg-blue-400 rounded-full border-2 border-white"></div>
-                    <div className="w-6 h-6 bg-green-400 rounded-full border-2 border-white"></div>
-                    <div className="w-6 h-6 bg-purple-400 rounded-full border-2 border-white"></div>
-                  </div>
-                  <span className="text-xs text-gray-500">+847 followers</span>
-                </div>
-              </div> */}
-
-              {/* ATIA Card */}
-              {/* <div className="absolute top-32 right-4 bg-white rounded-xl shadow-lg p-6 w-56 transform -rotate-2 hover:rotate-0 transition-all duration-300 hover:shadow-xl z-10">
-                <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-blue-500 rounded-lg flex items-center justify-center">
-                    <Globe className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900">ATIA</h4>
-                    <p className="text-xs text-gray-600">Tunisia AI Association</p>
-                  </div>
-                </div>
-                <div className="space-y-2 text-xs text-gray-600">
+          {/* Enhanced Image Section */}
+          <SlideIn direction="right" className="flex justify-center lg:justify-end">
+            <div className="relative group">
+              {/* Image container with enhanced styling */}
+              <div className="relative">
+                {/* Glow effect behind image */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-400/20 rounded-3xl blur-2xl scale-110 group-hover:scale-125 transition-transform duration-500"></div>
+                
+                {/* Main image with improved styling */}
+                {/* <div className="relative bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-sm rounded-3xl p-6 border border-white/30"> */}
+                  <Image 
+                    src={contactImg} 
+                    alt="Contact ATIA" 
+                    width={500} 
+                    height={500}
+                    className="rounded-2xl  group-hover:scale-105 transition-transform duration-500"
+                  />
+                {/* </div> */}
+                
+                {/* Floating elements */}
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-bounce shadow-lg" style={{animationDelay: '0.5s'}}></div>
+                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full animate-pulse shadow-lg"></div>
+                <div className="absolute top-8 -left-2 w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-ping shadow-lg"></div>
+                
+                {/* Floating contact badge */}
+                {/* <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-white/30">
                   <div className="flex items-center space-x-2">
-                    <Mail className="w-3 h-3" />
-                    <span>contact@atia.org.tn</span>
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-medium text-gray-700">En ligne</span>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Phone className="w-3 h-3" />
-                    <span>(+216) 25 80 61 90</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="w-3 h-3" />
-                    <span>ENIS, La Manouba</span>
-                  </div>
-                </div>
-                <div className="mt-4 flex space-x-1">
-                  <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
+                </div> */}
               </div>
-
-              
-              <div className="absolute bottom-8 left-12 bg-blue-600 text-white p-3 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-300 z-30">
-                <Linkedin className="w-6 h-6" />
-              </div>
-
-
-              <div className="absolute top-16 right-16 w-4 h-4 bg-yellow-400 rounded-full animate-bounce" style={{animationDelay: '0.5s'}}></div>
-              <div className="absolute bottom-16 left-8 w-3 h-3 bg-pink-400 rounded-full animate-pulse"></div>
-              <div className="absolute top-24 left-16 w-2 h-2 bg-purple-400 rounded-full animate-ping"></div> */}
             </div>
           </SlideIn>
         </div>
+
+        {/* Additional CTA Section */}
+        <FadeIn className="text-center mt-16">
+          <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-3xl p-8 border border-white/20">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Prêt à rejoindre notre communauté IA ?
+            </h3>
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              Découvrez les opportunités passionnantes dans le domaine de l'intelligence artificielle en Tunisie
+            </p>
+            <Button className="bg-gradient-to-r from-primary to-orange-400 hover:from-orange-500 hover:to-primary text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group">
+              Contactez-nous maintenant
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </div>
+        </FadeIn>
       </div>
     </section>
   )

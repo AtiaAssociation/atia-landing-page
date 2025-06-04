@@ -15,7 +15,7 @@ export function StatsSection() {
       icon: BookOpen,
       value: 300,
       label: "Thèses de doctorat",
-      color: "text-orange-600",
+      color: "text-primary",
       bgColor: "bg-orange-100",
     },
     {
@@ -49,7 +49,9 @@ export function StatsSection() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Une Référence Scientifique Nationale
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
+
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto ">
               Forte de ses ancrages dans les premières unités de recherches
               tunisiennes et de sa position sur un écosystème académique solide,
               composé de plus d'une centaine de chercheurs et d'industriels.
@@ -80,7 +82,7 @@ export function StatsSection() {
 
         {/* <FadeIn delay={0.5}>
           <div className="text-center mt-16">
-            <div className="bg-gradient-to-r from-orange-600 to-blue-600 rounded-2xl p-8 text-white max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-primary to-blue-600 rounded-2xl p-8 text-white max-w-4xl mx-auto">
               <h3 className="text-2xl font-bold mb-4">
                 Engagement pour une IA Responsable
               </h3>

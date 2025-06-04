@@ -42,21 +42,21 @@ export function AboutSection() {
             <SlideIn delay={0.4}>
               <div className="space-y-4">
                 <div className="flex items-start space-x-4">
-                  <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-blue-100">
                     Promouvoir la recherche et le développement dans le domaine
                     de l'IA
                   </p>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-blue-100">
                     Organiser des événements scientifiques et des conférences
                     internationales
                   </p>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-blue-100">
                     Faciliter les collaborations entre chercheurs et industriels
                   </p>
@@ -65,7 +65,7 @@ export function AboutSection() {
             </SlideIn>
 
             <SlideIn delay={0.6}>
-              <Button className="bg-primary text-white px-10 py-5 text-[17px] font-bold">
+              <Button className="bg-primary text-white px-10 py-5 text-[17px] font-bold cursor-pointer">
                 Voir Plus
               </Button>
             </SlideIn>
@@ -76,7 +76,7 @@ export function AboutSection() {
             <FadeIn delay={0.8}>
               <Card className="bg-white/10 backdrop-blur-md border-white/20 max-w-sm py-0">
                 <CardContent className="p-3 pb-6 text-center">
-                  {/* <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full mx-auto mb-4 flex items-center justify-center"> */}
+                  {/* <div className="w-24 h-24 bg-gradient-to-br from-primary to-primary rounded-full mx-auto mb-4 flex items-center justify-center"> */}
                   <Image src={fondateur} alt="fondateur" />
                   {/* </div> */}
                   <h3 className="text-xl  m-2 mt-5 text-white font-bold">

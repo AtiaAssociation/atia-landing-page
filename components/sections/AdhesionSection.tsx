@@ -138,7 +138,7 @@ export const AdhesionSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
             Rejoignez l'ATIA
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-orange-600 to-blue-600 mx-auto mb-6"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-primary to-blue-600 mx-auto mb-6"></div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Devenez membre de l'Association Tunisienne d'Intelligence Artificielle et participez à l'avenir technologique de la Tunisie
           </p>
@@ -174,7 +174,7 @@ export const AdhesionSection = () => {
                       <span className="text-2xl">{type.icon}</span>
                       <div>
                         <h4 className="text-lg font-semibold text-white">{type.title}</h4>
-                        <p className="text-orange-400 font-bold text-xl">{type.price}</p>
+                        <p className="text-primary font-bold text-xl">{type.price}</p>
                       </div>
                     </div>
                     <motion.div
@@ -361,7 +361,7 @@ export const AdhesionSection = () => {
                       disabled={isSubmitting}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full py-4 bg-gradient-to-r from-orange-600 to-blue-600 text-white font-semibold rounded-lg hover:from-orange-700 hover:to-blue-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                      className="w-full py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg hover:from-orange-700 hover:to-blue-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 cursor-pointer"
                     >
                       {isSubmitting ? (
                         <>

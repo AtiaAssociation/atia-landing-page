@@ -34,18 +34,18 @@ export function Header() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-orange-600 transition-colors duration-200 font-medium"
+                className="text-gray-700 hover:text-primary transition-colors duration-200 font-medium"
               >
                 {item.name}
               </a>
             ))}
           {/* CTA Button */}
 
-            <Button className="border-1 border-black bg-white hover:bg-white cursor-pointer text-black font-semibold">
+            <Button className="border-1 border-black bg-white hover:bg-white hover:border-primary hover:text-primary cursor-pointer text-black font-semibold ">
                 <a
                 key="contact"
                 href="#contact"
-                className="text-gray-700 hover:text-orange-600 transition-colors duration-200 font-medium"
+                className="text-gray-700 hover:text-primary   font-medium"
               >
                 Contact
               </a>
@@ -80,13 +80,13 @@ export function Header() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="text-gray-700 hover:text-orange-600 transition-colors duration-200 font-medium"
+                    className="text-gray-700 hover:text-primary transition-colors duration-200 font-medium"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
                   </motion.a>
                 ))}
-                <Button className="bg-orange-600 hover:bg-orange-700 text-white w-full mt-4">
+                <Button className="bg-primary hover:bg-orange-700 text-white w-full mt-4">
                   Adhérer maintenant
                 </Button>
               </nav>

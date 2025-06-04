@@ -147,6 +147,7 @@ html {
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
+  --color-third: var(--third);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
@@ -180,10 +181,13 @@ html {
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
 
-  --primary: #ea580c;
+  --primary: #FF8904;
+  /* --primary: #F89A32; */
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: #44489a;
+  /* --secondary: #44489a; */
+  --secondary: #155DFC;
   --secondary-foreground: oklch(0.205 0 0);
+  --third : #C4D943;
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);

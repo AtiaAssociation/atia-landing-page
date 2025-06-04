@@ -28,21 +28,21 @@ export function PartnersSection() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section id="partners" className=" py-24 overflow-hidden">
+    <section id="partners" className=" py-16 pt-0 sm:py-20 overflow-hidden">
       <div className="">
         <FadeIn>
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Nos Partenaires
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-orange-600 to-blue-600 mx-auto"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
           </div>
         </FadeIn>
 
         {/* Seamless Animated Carousel */}
         <div className=" relative">
           <div
-            className="bg-gray-50 py-12 relative overflow-hidden rounded-xl"
+            className="bg-gray-50 py-10 relative overflow-hidden rounded-xl"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -59,7 +59,7 @@ export function PartnersSection() {
               style={{
                 animationPlayState: isHovered ? "paused" : "running",
               }}
-              className="flex gap-20 items-center"
+              className="flex gap-8 sm:gap-20 items-center"
             >
               {duplicatedPartners.map((partner, index) => (
                 <motion.div
@@ -75,9 +75,9 @@ export function PartnersSection() {
                     <Image
                       src={partner.logo}
                       alt={partner.name}
-                      width={250}
-                      height={120}
-                      className="object-contain"
+                      // width={250}
+                      // height={120}
+                      className="object-contain w-36 sm:w-44"
                     />
                   </div>
                 </motion.div>

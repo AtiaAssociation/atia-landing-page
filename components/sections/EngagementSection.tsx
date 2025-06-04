@@ -79,7 +79,17 @@ export default function EngagementSection() {
   return (
     <div className="relative z-10 ">
       <FadeIn delay={500}>
-        <div className="pt-32 pb-20  container  ">
+        <div className="pt-32 pb-10 sm:pb-20  container  ">
+            <FadeIn>
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Engagement pour une IA Responsable
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
+
+       
+          </div>
+        </FadeIn>
           <div className="grid lg:grid-cols-2 gap-16  items-center ">
             {/* Left Side – Enhanced Text Content */}
             <div className="space-y-8">
@@ -91,16 +101,16 @@ export default function EngagementSection() {
                     </span>
                   </div> */}
 
-                <FadeIn delay={0.4}>
+                {/* <FadeIn delay={0.4}>
                   <h2 className="text-4xl lg:text-5xl font-black leading-tight">
-                    <span className="block text-transparent bg-clip-text bg-gradient-to-b from-orange-600 vi to-blue-600">
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-b from-primary vi to-blue-600">
                       Engagement pour une IA Responsable
                     </span>
                   </h2>
-                </FadeIn>
+                </FadeIn> */}
 
                 <SlideIn delay={0.6}>
-                  <p className="text-xl text-gray-700 leading-relaxed max-w-2xl">
+                  <p className="text-xl  text-gray-700 leading-relaxed max-w-2xl">
                     Au-delà de la recherche, l'ATIA joue un rôle moteur dans
                     l'appropriation éthique et stratégique de l'intelligence
                     artificielle. Elle veille à aligner ses actions sur les
@@ -111,7 +121,7 @@ export default function EngagementSection() {
               </div>
 
               {/* Interactive Features Grid */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {features.map((feature, index) => {
                   const Icon = feature.icon;
                   return (
@@ -160,11 +170,11 @@ export default function EngagementSection() {
             </div>
 
             {/* Right Side – Enhanced Visual */}
-            <SlideIn delay={0.9} className="overflow-hidden">
+            <SlideIn delay={0.9} >
               <div className="relative flex justify-center lg:justify-end lg:pr-10 ">
                 <div className="relative">
                   {/* Animated Rings */}
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  {/* <div className="absolute inset-0 flex items-center justify-center">
                     <div
                       className="w-[400px] h-[400px] border-2 border-blue-300/30 rounded-full animate-spin"
                       style={{ animationDuration: "20s" }}
@@ -180,7 +190,7 @@ export default function EngagementSection() {
                       className="absolute w-[350px] h-[350px] border-2 border-cyan-300/30 rounded-full animate-spin"
                       style={{ animationDuration: "25s" }}
                     ></div>
-                  </div>
+                  </div> */}
 
                   <Image
                     src={statusImg}

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Linkedin, Mail, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaLinkedinIn } from "react-icons/fa";
 import khaled from "@/public/images/bureau/khaled.png"
@@ -21,6 +21,12 @@ import { AdhesionSection } from "./AdhesionSection";
 
 export default function TeamSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Add refs for scroll animations
+  const sectionRef = React.useRef(null);
+  const isSectionInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const statsRef = React.useRef(null);
+  const isStatsInView = useInView(statsRef, { once: true, amount: 0.3 });
 
   const teamMembers = [
     {
@@ -142,27 +148,47 @@ export default function TeamSection() {
   };
 
   return (
-    <section id="team" className="py-20 bg-gray-900 text-white overflow-hidden">
+    <section id="team" className="py-20 bg-gray-900 text-white overflow-hidden" ref={sectionRef}>
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl md:text-4xl font-bold mb-4"
+          >
             Bureau Exécutif
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-orange-600 to-blue-600 mx-auto mb-6"></div>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.div 
+            initial={{ width: 0 }}
+            animate={isSectionInView ? { width: "6rem" } : { width: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="h-1 bg-gradient-to-r from-primary to-blue-600 mx-auto mb-6"
+          />
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-xl text-gray-300 max-w-2xl mx-auto"
+          >
             Notre équipe dirigeante composée d'experts reconnus dans le domaine
             de l'intelligence artificielle
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Carousel Controls */}
-        <div className="flex justify-center items-center mb-8 space-x-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex justify-center items-center mb-8 space-x-4"
+        >
           <Button
             onClick={prevSlide}
             variant="outline"
@@ -194,7 +220,7 @@ export default function TeamSection() {
           >
             <ChevronRight size={16} />
           </Button>
-        </div>
+        </motion.div>
 
         {/* Team Cards Carousel */}
         <div className="relative">
@@ -211,7 +237,7 @@ export default function TeamSection() {
                 <motion.div
                   key={`${currentIndex}-${index}`}
                   initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                   transition={{
                     duration: 0.6,
                     delay: index * 0.1,
@@ -221,16 +247,19 @@ export default function TeamSection() {
                   <Card className="bg-gray-800 py-0 border-gray-700 hover:border-orange-500/50 transition-all duration-500 h-full group overflow-hidden">
                     <CardContent className="p-0 h-full flex flex-col">
                       {/* Image Container with Blur Overlay */}
-                      <div className="relative overflow-hidden">
+                      <div className="relative overflow-hidden aspect-[20/15]">
                         <motion.div
-                          className="relative w-full h-60"
+                          className="relative w-full h-full"
                           whileHover={{ scale: 1.1 }}
                           transition={{ duration: 0.6, ease: "easeOut" }}
                         >
                           <Image
                             src={member.image}
                             alt={member.name}
-                            className="w-full h-full  transition-all duration-500 group-hover:blur-sm"
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            className="object-cover object-center transition-all duration-500 group-hover:blur-sm"
+                            priority={index < 4}
                           />
 
                           {/* Overlay that appears on hover */}
@@ -256,7 +285,7 @@ export default function TeamSection() {
                                 href={`mailto:${member.email}`}
                                 whileHover={{ scale: 1.2, rotate: -5 }}
                                 whileTap={{ scale: 0.8 }}
-                                className="w-12 h-12 bg-orange-600/90 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors backdrop-blur-sm"
+                                className="w-12 h-12 bg-primary/90 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors backdrop-blur-sm"
                               >
                                 <Mail size={20} className="text-white" />
                               </motion.a>
@@ -273,14 +302,14 @@ export default function TeamSection() {
                       >
                         <div>
                           <motion.h3
-                            className="text-xl font-semibold mb-2 text-white group-hover:text-orange-400 transition-colors duration-300"
+                            className="text-xl font-semibold mb-2 text-white group-hover:text-primary transition-colors duration-300"
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
                           >
                             {member.name}
                           </motion.h3>
                           <motion.p
-                            className="text-orange-400 font-medium  group-hover:text-orange-300 transition-colors duration-300"
+                            className="text-primary font-medium  group-hover:text-orange-300 transition-colors duration-300"
                             whileHover={{ x: 5 }}
                             transition={{ duration: 0.2 }}
                           >
@@ -310,7 +339,12 @@ export default function TeamSection() {
         </div>
 
         {/* Progress Bar */}
-        <div className="mt-8 flex justify-center">
+        <motion.div 
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={isSectionInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-8 flex justify-center"
+        >
           <div className="w-64 h-1 bg-gray-700 rounded-full overflow-hidden">
             <motion.div
               className="h-full bg-gradient-to-r from-orange-500 to-blue-500"
@@ -319,33 +353,51 @@ export default function TeamSection() {
               transition={{ duration: 0.5 }}
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Stats */}
         <motion.div
+          ref={statsRef}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={isStatsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mt-12"
         >
-          <div className="bg-gradient-to-r from-orange-600/10 to-blue-600/10 rounded-2xl p-6 border border-gray-700/50 backdrop-blur-sm mb-10">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isStatsInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="bg-gradient-to-r from-primary/10 to-blue-600/10 rounded-2xl p-6 border border-gray-700/50 backdrop-blur-sm mb-10"
+          >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <h4 className="text-2xl font-bold text-orange-400">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isStatsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <h4 className="text-2xl font-bold text-primary">
                   {teamMembers.length}
                 </h4>
                 <p className="text-gray-300">Experts</p>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isStatsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
                 <h4 className="text-2xl font-bold text-blue-400">20+</h4>
                 <p className="text-gray-300">Années d'expérience</p>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isStatsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+              >
                 <h4 className="text-2xl font-bold text-green-400">100+</h4>
                 <p className="text-gray-300">Projets réalisés</p>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
       <AdhesionSection/>

@@ -27,7 +27,7 @@ export function HeroSection() {
             <FadeIn delay={0.2}>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
                 L'Association Tunisienne
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-blue-600">
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary  to-secondary">
                   pour l'Intelligence Artificielle
                 </span>
               </h1>
@@ -54,14 +54,14 @@ export function HeroSection() {
                   <input
                     type="text"
                     placeholder="Entrez votre email"
-                    className="pl-7   outline-none  px-5"
+                    className="pl-7   outline-none  px-5 w-full"
                   />
                 </div>
                 <Button
                   variant="outline"
-                  className=" bg-orange-400 hover:bg-orange-350 px-8 py-5 text-md text-white hover:text-white flex items-center gap-4"
+                  className=" bg-primary hover:bg-orange-350 px-8 py-5 text-md text-white hover:text-white flex items-center gap-4"
                 >
-                  Voir nos événements
+                  Rejoindre la communauté
                   <FaArrowRight size={15} />
                 </Button>
               </div>
@@ -70,7 +70,7 @@ export function HeroSection() {
             <SlideIn delay={0.8}>
               <div className="flex items-center space-x-8 pt-8">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-600">
+                  <div className="text-3xl font-bold text-primary">
                     {" "}
                     <CounterAnimation value={300} />+
                   </div>
@@ -79,7 +79,7 @@ export function HeroSection() {
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600">
+                  <div className="text-3xl font-bold text-secondary">
                     {" "}
                     <CounterAnimation value={1500} />+
                   </div>
