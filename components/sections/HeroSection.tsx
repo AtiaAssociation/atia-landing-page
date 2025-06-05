@@ -59,7 +59,7 @@ export function HeroSection() {
                 </div>
                 <Button
                   variant="outline"
-                  className=" bg-primary hover:bg-orange-350 px-8 py-5 text-md text-white hover:text-white flex items-center gap-4"
+                  className=" bg-primary  hover:bg-orange-450 px-8 py-5 text-md text-white hover:text-white flex items-center gap-4 cursor-pointer"
                 >
                   Rejoindre la communauté
                   <FaArrowRight size={15} />

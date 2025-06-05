@@ -96,7 +96,7 @@ export const AdhesionSection = () => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <div className="bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-2xl p-12 max-w-2xl mx-auto">
+            <div className="bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-2xl p-7 sm:p-12 max-w-2xl mx-auto">
               <h3 className="text-2xl font-bold mb-4 text-white">Prêt à rejoindre l'ATIA ?</h3>
               <p className="text-gray-300 mb-8 text-lg">
                 Remplissez notre formulaire d'adhésion et commencez votre parcours avec nous dès aujourd'hui
@@ -106,10 +106,10 @@ export const AdhesionSection = () => {
                 onClick={handleRedirectToForm}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg hover:from-orange-700 hover:to-blue-700 transition-all duration-300 text-lg shadow-lg hover:shadow-xl cursor-pointer"
+                className="inline-flex items-center space-x-3 px-4 sm:px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg hover:from-orange-700 hover:to-blue-700 transition-all duration-300 text-lg shadow-lg hover:shadow-xl cursor-pointer"
               >
                 <span>Remplir le formulaire d'adhésion</span>
-                <ExternalLink className="w-5 h-5" />
+                <ExternalLink className="w-10 h-10 sm:w-5 sm:h-5" />
               </motion.button>
               
               <p className="text-gray-400 text-sm mt-4">

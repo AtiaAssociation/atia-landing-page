@@ -22,7 +22,7 @@ export function AboutSection() {
       <div className="container  relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
           {/* Left content */}
-          <div className="space-y-8 col-span-2">
+          <div className="space-y-8 lg:col-span-2">
             <FadeIn>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 Présentation de l'ATIA
@@ -65,14 +65,14 @@ export function AboutSection() {
             </SlideIn>
 
             <SlideIn delay={0.6}>
-              <Button className="bg-primary text-white px-10 py-5 text-[17px] font-bold cursor-pointer">
+              <Button className="bg-primary text-white px-16 py-5 text-[17px] font-bold cursor-pointer ">
                 Voir Plus
               </Button>
             </SlideIn>
           </div>
 
           {/* Right content - Profile card */}
-          <div className="flex justify-end">
+          <div className="flex justify-center lg:justify-end">
             <FadeIn delay={0.8}>
               <Card className="bg-white/10 backdrop-blur-md border-white/20 max-w-sm py-0">
                 <CardContent className="p-3 pb-6 text-center">
