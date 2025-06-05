@@ -12,10 +12,10 @@ import { FaArrowRight } from "react-icons/fa";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden">
+    <section id="about" className="relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
+        {/* <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div> */}
         {/* <div className="absolute top-40 right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse delay-1000"></div> */}
         {/* <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse delay-2000"></div> */}
       </div>
@@ -100,18 +100,43 @@ export function HeroSection() {
             </SlideIn>
           </div>
 
-          {/* Right content - Interactive Map/Visual */}
+          {/* Right content - Animated Image Only */}
           <div className="relative">
             <FadeIn delay={1.0}>
-              <div className="relative w-full h-96 lg:h-[500px] ">
-                {/* Tunisia Map Representation */}
+              <div className="relative w-full h-96 lg:h-[500px]">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 1, delay: 1.2 }}
+                    initial={{ 
+                      scale: 0.8, 
+                      opacity: 0,
+                      rotateY: -15,
+                      y: 50
+                    }}
+                    animate={{
+                      y: [0, -10, 0],
+                      scale: 1,
+                      opacity: 1,
+                      rotateY: 0
+                    }}
+                    transition={{
+                      y: {
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }
+                    }}
+                    whileHover={{
+                      scale: 1.05,
+                      rotateY: 5,
+                      y: -10,
+                      transition: { duration: 0.4, ease: "easeOut" }
+                    }}
                   >
-                    <Image src={heroSection} alt="Map" />
+                    <Image 
+                      src={heroSection} 
+                      alt="ATIA Tunisia Map" 
+                      className="drop-shadow-2xl filter brightness-105 contrast-105"
+                    />
                   </motion.div>
                 </div>
               </div>

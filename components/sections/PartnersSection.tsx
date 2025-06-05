@@ -28,7 +28,7 @@ export function PartnersSection() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <section id="partners" className=" py-16 pt-0 sm:py-20 overflow-hidden">
+    <section id="partners" className="   overflow-hidden">
       <div className="">
         <FadeIn>
           <div className="text-center mb-10 sm:mb-12">

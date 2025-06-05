@@ -20,9 +20,9 @@ export function AboutSection() {
       </div>
 
       <div className="container  relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
           {/* Left content */}
-          <div className="space-y-8">
+          <div className="space-y-8 col-span-2">
             <FadeIn>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 Présentation de l'ATIA
@@ -30,7 +30,7 @@ export function AboutSection() {
             </FadeIn>
 
             <SlideIn delay={0.2}>
-              <p className="text-[17px] font-semibold text-blue-100 leading-relaxed mb-6">
+              <p className="text-[20px] font-semibold text-blue-100 leading-relaxed mb-6">
                 L'Association Tunisienne pour l'Intelligence Artificielle (ATIA)
                 est une organisation à but non lucratif, fondée en 2009 par le
                 Professeur Khaled Ghedira. Elle a pour mission de promouvoir la
@@ -40,7 +40,7 @@ export function AboutSection() {
             </SlideIn>
 
             <SlideIn delay={0.4}>
-              <div className="space-y-4">
+              <div className="space-y-4 text-[18px]">
                 <div className="flex items-start space-x-4">
                   <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                   <p className="text-blue-100">
@@ -72,7 +72,7 @@ export function AboutSection() {
           </div>
 
           {/* Right content - Profile card */}
-          <div className="flex justify-center">
+          <div className="flex justify-end">
             <FadeIn delay={0.8}>
               <Card className="bg-white/10 backdrop-blur-md border-white/20 max-w-sm py-0">
                 <CardContent className="p-3 pb-6 text-center">

@@ -77,19 +77,17 @@ export default function EngagementSection() {
   ];
 
   return (
-    <div className="relative z-10 ">
+    <section id="engagement" className="relative z-10">
       <FadeIn delay={500}>
-        <div className="pt-32 pb-10 sm:pb-20  container  ">
-            <FadeIn>
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Engagement pour une IA Responsable
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
-
-       
-          </div>
-        </FadeIn>
+        <div className="pt-32 pb-10 sm:pb-20 container">
+          <FadeIn>
+            <div className="text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Engagement pour une IA Responsable
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6"></div>
+            </div>
+          </FadeIn>
           <div className="grid lg:grid-cols-2 gap-16  items-center ">
             {/* Left Side – Enhanced Text Content */}
             <div className="space-y-8">
@@ -224,6 +222,6 @@ export default function EngagementSection() {
           </div>
         </div>
       </FadeIn>
-    </div>
+    </section>
   );
 }

@@ -5,7 +5,9 @@ import { AboutSection } from "@/components/sections/AboutSection";
 import TeamSection from "@/components/sections/TeamSection";
 import { EventsSection } from "@/components/sections/EventsSection";
 import { ContactSection } from "@/components/sections/ContactSections";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import bgHeroSection from "@/public/images/bgHeroSection.png";
+
 export default function Home() {
   return (
     <div className="">
@@ -22,6 +24,7 @@ export default function Home() {
       <EventsSection />
       <TeamSection />
       <ContactSection />
+      <ScrollToTop />
     </div>
   );
 }

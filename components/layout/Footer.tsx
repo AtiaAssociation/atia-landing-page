@@ -1,4 +1,6 @@
 import { Facebook, Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import Image from "next/image"
+import logo from "@/public/images/logo.png"
 
 export function Footer() {
   return (
@@ -8,10 +10,8 @@ export function Footer() {
           {/* Logo & Description */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">A</span>
-              </div>
-              <span className="font-bold text-xl">ATIA</span>
+              <Image src={logo} alt="logo" width={60} className="bg-gray-300 p-2 rounded-sm"/>
+              {/* <span className="font-bold text-xl">ATIA</span> */}
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
               L'Association Tunisienne pour l'Intelligence Artificielle œuvre pour 

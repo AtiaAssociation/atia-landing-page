@@ -7,13 +7,11 @@ import { FadeIn } from "@/components/animations/fade-in"
 import { SlideIn } from "@/components/animations/slide-in"
 import { StaggerContainer } from "@/components/animations/stagger-container"
 import { StaggerItem } from "@/components/animations/stagger-item"
-import { Mail, Phone, MapPin, Facebook, Linkedin, Globe, Users, ArrowRight } from "lucide-react"
-import contactImg from "@/public/images/contactImg.png"
-import Image from "next/image"
+import { Mail, Phone, MapPin, Facebook, Linkedin, Globe, Users, ArrowRight, Brain, Zap, Network, Target } from "lucide-react"
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-20  bg-gradient-to-br from-orange-50/30 via-white to-blue-50/30 relative overflow-hidden">
+    <section id="contact" className="py-20 bg-gradient-to-br from-orange-50/30 via-white to-blue-50/30 relative overflow-hidden">
       {/* Enhanced Background decoration */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-primary to-orange-400 rounded-full blur-3xl"></div>
@@ -42,7 +40,7 @@ export function ContactSection() {
         </FadeIn>
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Contact Information - Redesigned without card separation */}
+          {/* Contact Information */}
           <SlideIn direction="left" className="space-y-8">
             <div className="relative">
               {/* Subtle background glow */}
@@ -111,54 +109,101 @@ export function ContactSection() {
                   </StaggerItem>
                 </StaggerContainer>
 
-                {/* Enhanced Social Buttons */}
+                {/* Enhanced Social Buttons with actual links */}
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                  <Button className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                    <Facebook className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                    Suivez-nous
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <Button 
+                    asChild
+                    className="group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    <a href="https://www.facebook.com/ATIATunsie" target="_blank" rel="noopener noreferrer">
+                      <Facebook className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                      Suivez-nous
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </a>
                   </Button>
-                  <Button variant="outline" className="group border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-orange-400 hover:text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                    <Linkedin className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                    LinkedIn
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <Button 
+                    asChild
+                    variant="outline" 
+                    className="group border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-orange-400 hover:text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    <a href="https://www.linkedin.com/in/atia-tunisie-62b827195/" target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                      LinkedIn
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </a>
                   </Button>
                 </div>
               </div>
             </div>
           </SlideIn>
 
-          {/* Enhanced Image Section */}
+          {/* Creative Interactive AI Visualization */}
           <SlideIn direction="right" className="flex justify-center lg:justify-end">
-            <div className="relative group">
-              {/* Image container with enhanced styling */}
-              <div className="relative">
-                {/* Glow effect behind image */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-400/20 rounded-3xl blur-2xl scale-110 group-hover:scale-125 transition-transform duration-500"></div>
-                
-                {/* Main image with improved styling */}
-                {/* <div className="relative bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-sm rounded-3xl p-6 border border-white/30"> */}
-                  <Image 
-                    src={contactImg} 
-                    alt="Contact ATIA" 
-                    width={500} 
-                    height={500}
-                    className="rounded-2xl  group-hover:scale-105 transition-transform duration-500"
-                  />
-                {/* </div> */}
-                
-                {/* Floating elements */}
-                <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full animate-bounce shadow-lg" style={{animationDelay: '0.5s'}}></div>
-                <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full animate-pulse shadow-lg"></div>
-                <div className="absolute top-8 -left-2 w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-ping shadow-lg"></div>
-                
-                {/* Floating contact badge */}
-                {/* <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-white/30">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-gray-700">En ligne</span>
+            <div className="relative w-full max-w-lg">
+              <div className="relative bg-white/70 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+                {/* Header with ATIA branding */}
+                <div className="flex items-center mb-8">
+                  <div className="w-3 h-3 bg-primary rounded-full mr-3"></div>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    Notre Réseau
+                  </h3>
+                </div>
+
+                {/* Simplified Network Visualization */}
+                <div className="relative h-40 mb-8 bg-gradient-to-br from-gray-50 to-blue-50/50 rounded-2xl overflow-hidden">
+                  <div className="absolute inset-0">
+                    {/* Animated network nodes */}
+                    <div className="absolute top-8 left-8 w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse shadow-lg"></div>
+                    <div className="absolute top-12 right-12 w-3 h-3 bg-gradient-to-r from-green-400 to-blue-400 rounded-full animate-bounce shadow-lg" style={{animationDelay: '0.5s'}}></div>
+                    <div className="absolute bottom-16 left-16 w-5 h-5 bg-gradient-to-r from-orange-400 to-red-400 rounded-full animate-ping shadow-lg" style={{animationDelay: '1s'}}></div>
+                    <div className="absolute bottom-8 right-8 w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse shadow-lg" style={{animationDelay: '1.5s'}}></div>
+                    
+                    {/* Connecting lines */}
+                    <svg className="absolute inset-0 w-full h-full opacity-30">
+                      <line x1="32" y1="32" x2="50%" y2="50%" stroke="url(#gradient1)" strokeWidth="2" className="animate-pulse" />
+                      <line x1="90%" y1="48" x2="50%" y2="50%" stroke="url(#gradient2)" strokeWidth="2" className="animate-pulse" style={{animationDelay: '0.5s'}} />
+                      <line x1="64" y1="80%" x2="50%" y2="50%" stroke="url(#gradient3)" strokeWidth="2" className="animate-pulse" style={{animationDelay: '1s'}} />
+                      <line x1="90%" y1="80%" x2="50%" y2="50%" stroke="url(#gradient4)" strokeWidth="2" className="animate-pulse" style={{animationDelay: '1.5s'}} />
+                      <defs>
+                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#3B82F6" />
+                          <stop offset="100%" stopColor="#8B5CF6" />
+                        </linearGradient>
+                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#10B981" />
+                          <stop offset="100%" stopColor="#3B82F6" />
+                        </linearGradient>
+                        <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#F59E0B" />
+                          <stop offset="100%" stopColor="#EF4444" />
+                        </linearGradient>
+                        <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#8B5CF6" />
+                          <stop offset="100%" stopColor="#EC4899" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
                   </div>
-                </div> */}
+                  
+                  {/* Center AI indicator */}
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg">
+                      <Network className="w-6 h-6 text-primary" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Simplified Feature highlights */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-xl p-4 text-center">
+                    <Users className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+                    <p className="text-sm font-semibold text-gray-800">Communauté Active</p>
+                  </div>
+                  <div className="bg-gradient-to-br from-green-50 to-green-100/50 rounded-xl p-4 text-center">
+                    <Zap className="w-6 h-6 text-green-600 mx-auto mb-2" />
+                    <p className="text-sm font-semibold text-gray-800">Innovation IA</p>
+                  </div>
+                </div>
               </div>
             </div>
           </SlideIn>
@@ -173,9 +218,14 @@ export function ContactSection() {
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
               Découvrez les opportunités passionnantes dans le domaine de l'intelligence artificielle en Tunisie
             </p>
-            <Button className="bg-gradient-to-r from-primary to-orange-400 hover:from-orange-500 hover:to-primary text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group">
-              Contactez-nous maintenant
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            <Button 
+              className="bg-gradient-to-r from-primary to-orange-400 hover:from-orange-500 hover:to-primary text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+              asChild
+            >
+              <a href="mailto:contact@atia.org.tn">
+                Contactez-nous maintenant
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </a>
             </Button>
           </div>
         </FadeIn>

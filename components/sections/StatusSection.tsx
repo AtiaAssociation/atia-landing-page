@@ -42,7 +42,7 @@ export function StatsSection() {
   ];
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section id="stats" className="py-24 bg-gray-50">
       <div className="container">
         <FadeIn>
           <div className="text-center mb-16">
@@ -114,12 +114,12 @@ export function StatsSection() {
                 Responsable
               </h3>
               <p className="text-gray-700 text-lg mb-6">
-                Au-delà de la recherche, l’ATIA joue un rôle moteur dans
-                l’appropriation éthique et stratégique de l’intelligence
+                Au-delà de la recherche, l'ATIA joue un rôle moteur dans
+                l'appropriation éthique et stratégique de l'intelligence
                 artificielle. Elle veille à aligner ses actions sur les avancées
                 technologiques et les défis socio-économiques actuels, en
                 proposant des solutions pertinentes et durables, au service de
-                l’humain et de l’intérêt collectif.
+                l'humain et de l'intérêt collectif.
               </p>
             </div>
 
