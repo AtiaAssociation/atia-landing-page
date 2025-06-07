@@ -12,7 +12,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 export function HeroSection() {
   return (
-    <section id="about" className="relative overflow-hidden">
+    <section  className="relative overflow-hidden ">
       {/* Background decorative elements */}
       <div className="absolute inset-0">
         {/* <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div> */}
@@ -20,7 +20,7 @@ export function HeroSection() {
         {/* <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse delay-2000"></div> */}
       </div>
 
-      <div className="container py-32 relative z-10">
+      <div className=" container py-32 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left content */}
           <div className="space-y-8">

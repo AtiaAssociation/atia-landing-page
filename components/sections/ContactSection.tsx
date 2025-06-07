@@ -27,7 +27,7 @@ export function ContactSection() {
         backgroundSize: '24px 24px'
       }}></div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container  relative z-10">
         <FadeIn className="text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary to-orange-400 rounded-2xl mb-6">
             <Mail className="w-8 h-8 text-white" />
@@ -48,7 +48,7 @@ export function ContactSection() {
               {/* Subtle background glow */}
               <div className="absolute inset-0 bg-gradient-to-r from-white/50 to-orange-50/50 rounded-3xl blur-xl"></div>
               
-              <div className="relative bg-white/70 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+              <div className="relative bg-white/70 backdrop-blur-sm rounded-3xl py-8 border border-white/20">
                 <div className="flex items-center mb-8">
                   <div className="w-3 h-3 bg-primary rounded-full mr-3"></div>
                   <h3 className="text-2xl font-bold text-gray-900">
@@ -64,7 +64,7 @@ export function ContactSection() {
                       </div>
                       <div className="flex-1">
                         <h4 className="font-semibold text-gray-900 mb-1">Adresse</h4>
-                        <p className="text-gray-600 leading-relaxed">
+                        <p className="text-gray-600 leading-relaxed font-mono">
                           ENIS, Campus Universitaire de la Manouba, CP 2010,<br />
                           La Manouba - Tunis
                         </p>
@@ -103,7 +103,7 @@ export function ContactSection() {
                       </div>
                       <div className="flex-1">
                         <h4 className="font-semibold text-gray-900 mb-1">Facebook</h4>
-                        <p className="text-gray-600">
+                        <p className="text-gray-600 font-mono">
                           Association Tunisienne pour l'Intelligence Artificielle
                         </p>
                       </div>

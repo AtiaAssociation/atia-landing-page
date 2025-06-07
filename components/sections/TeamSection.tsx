@@ -149,7 +149,7 @@ export default function TeamSection() {
 
   return (
     <section id="team" className="py-20 bg-gray-900 text-white overflow-hidden" ref={sectionRef}>
-      <div className="container mx-auto px-4">
+      <div className="container ">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

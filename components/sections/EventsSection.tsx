@@ -106,7 +106,7 @@ export const EventsSection = () => {
       id="events"
       className="py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50"
     >
-      <div className="container mx-auto px-4">
+      <div className="container ">
         <FadeIn>
           <div className="text-center mb-16">
             <motion.h2 

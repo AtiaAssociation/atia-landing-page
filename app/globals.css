@@ -138,6 +138,7 @@ html {
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --breakpoint-xs: 400px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -255,5 +256,5 @@ html {
 }
 
 .container {
-  @apply sm:max-w-[90vw] mx-auto px-5 sm:px-0;
+@apply max-w-[90vw] mx-auto;
 }

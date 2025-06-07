@@ -109,7 +109,7 @@ export const AdhesionSection = () => {
                 className="inline-flex items-center space-x-3 px-4 sm:px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg hover:from-orange-700 hover:to-blue-700 transition-all duration-300 text-lg shadow-lg hover:shadow-xl cursor-pointer"
               >
                 <span>Remplir le formulaire d'adhésion</span>
-                <ExternalLink className="w-10 h-10 sm:w-5 sm:h-5" />
+                <ExternalLink className="w-8 h-8 xs:w-5 xs:h-5" />
               </motion.button>
               
               <p className="text-gray-400 text-sm mt-4">

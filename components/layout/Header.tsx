@@ -24,29 +24,43 @@ export function Header() {
     }
   }, [])
 
-  // Smooth scroll to section handler
+  // Improved smooth scroll to section handler
   const handleScrollToSection = (id: string) => {
-    const section = document.getElementById(id)
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" })
-      setIsMenuOpen(false)
-    }
+    // Close menu immediately for better UX
+    setIsMenuOpen(false)
+    
+    // Small delay to ensure menu animation doesn't interfere
+    setTimeout(() => {
+      const section = document.getElementById(id)
+      if (section) {
+        const headerHeight = 100 // Adjust this to match your actual header height
+        const elementPosition = section.offsetTop
+        const offsetPosition = elementPosition - headerHeight
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        })
+      }
+    }, 50)
   }
 
-  // Advanced section detection logic from first file
+  // Advanced section detection logic
   useEffect(() => {
     const handleScroll = () => {
-      const sections = Array.from(document.querySelectorAll("section"))
-      const scrollPos = window.scrollY + 110 // Offset for fixed header
+      const sections = Array.from(document.querySelectorAll("section[id]")) as HTMLElement[]
+      if (sections.length === 0) return
+      
+      const scrollPos = window.scrollY + 150 // Offset for fixed header
 
-      let closestSectionId = "partners"
-      let closestDistance = Infinity
+      let currentSection = sections[0].id
 
       sections.forEach((section) => {
-        const distance = Math.abs(section.offsetTop - scrollPos)
-        if (distance < closestDistance) {
-          closestDistance = distance
-          closestSectionId = section.id
+        const sectionTop = section.offsetTop
+        const sectionHeight = section.offsetHeight
+        
+        if (scrollPos >= sectionTop - 200 && scrollPos < sectionTop + sectionHeight - 200) {
+          currentSection = section.id
         }
       })
 
@@ -54,24 +68,32 @@ export function Header() {
       const scrollBottom = window.innerHeight + window.scrollY
       const pageHeight = document.documentElement.scrollHeight
 
-      if (pageHeight - scrollBottom < 10) {
-        setActiveSection("contact")
-      } else {
-        setActiveSection(closestSectionId)
+      if (pageHeight - scrollBottom < 100) {
+        const lastSection = sections[sections.length - 1]
+        if (lastSection) {
+          currentSection = lastSection.id
+        }
+      }
+
+      setActiveSection(currentSection)
+    }
+
+    // Throttled scroll handler for better performance
+    let ticking = false
+    const throttledHandleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
       }
     }
 
-    // Debounced scroll handler for better performance
-    let timeout: NodeJS.Timeout
-    const debouncedHandleScroll = () => {
-      clearTimeout(timeout)
-      timeout = setTimeout(handleScroll, 50)
-    }
-
-    window.addEventListener("scroll", debouncedHandleScroll)
+    window.addEventListener("scroll", throttledHandleScroll)
     handleScroll() // Initial call
 
-    return () => window.removeEventListener("scroll", debouncedHandleScroll)
+    return () => window.removeEventListener("scroll", throttledHandleScroll)
   }, [])
 
   const menuItems = [
@@ -85,13 +107,13 @@ export function Header() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-      <div className="container mx-auto py-3">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+      <div className="container py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          {/* <div className="flex items-center"> */}
             <Image src={logo} alt="Logo" width={45} height={45} />
-          </div>
+          {/* </div> */}
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
@@ -119,24 +141,22 @@ export function Header() {
               </div>
             ))}
             
-            {/* CTA Button */}
+            
             <div className="relative">
               <Button 
-                className={`border-1 border-black bg-transparent group hover:bg-white hover:border-primary hover:text-primary cursor-pointer text-black font-semibold  ${
-                    activeSection === "contact" ? "border-primary " : ""
+                className={`border border-black bg-transparent group hover:bg-white hover:border-primary hover:text-primary cursor-pointer text-black font-semibold ${
+                    activeSection === "contact" ? "border-primary" : ""
                   }`}
                 onClick={() => handleScrollToSection("contact")}
               >
                 <span
                   className={`text-gray-700 hover:text-primary group-hover:text-primary font-medium ${
-                    activeSection === "contact" ? "text-primary " : ""
+                    activeSection === "contact" ? "text-primary" : ""
                   }`}
                 >
                   Contact
                 </span>
               </Button>
-              
-            
             </div>
           </nav>
 
@@ -144,6 +164,7 @@ export function Header() {
           <button
             className="lg:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -167,26 +188,36 @@ export function Header() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className={`cursor-pointer transition-colors duration-300 text-left ${
+                    className={`cursor-pointer transition-colors duration-300 text-left py-2 px-4 rounded-lg ${
                       activeSection === item.id
-                        ? "text-primary border-b-2 border-primary font-bold"
-                        : "text-gray-700 hover:text-gray-500"
+                        ? "text-primary bg-primary/10 font-bold"
+                        : "text-gray-700 hover:text-gray-500 hover:bg-gray-100"
                     }`}
                   >
                     {item.name}
                   </motion.button>
                 ))}
-                <Button 
-                  className="bg-primary hover:bg-orange-700 text-white w-full mt-4"
-                  onClick={() => handleScrollToSection("membership")}
+                <motion.button
+                    key="contact"                    
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 8 * 0.1 }}
+                 
+                  onClick={() => handleScrollToSection("contact")}
+                  >
+                     <Button 
+                  className="bg-primary hover:bg-orange-700 text-white w-full mt-4 cursor-pointer"
+                  onClick={() => handleScrollToSection("contact")}
                 >
-                  Adhérer maintenant
+                  Contact
                 </Button>
+                  </motion.button>
+              
               </nav>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-    </header>
+    </div>
   )
 }

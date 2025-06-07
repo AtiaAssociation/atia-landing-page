@@ -5,7 +5,7 @@ import logo from "@/public/images/logo.png"
 export function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 py-12">
+      <div className="container px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo & Description */}
           <div className="col-span-1 md:col-span-2">
@@ -18,10 +18,10 @@ export function Footer() {
               le développement et la promotion de l'IA en Tunisie.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-primary transition-colors">
+              <a href="https://www.facebook.com/ATIATunsie" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary transition-colors">
+              <a href="https://www.linkedin.com/in/atia-tunisie-62b827195/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -44,15 +44,15 @@ export function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <MapPin size={16} className="text-primary" />
-                <span className="text-gray-300 text-sm">Campus Universitaire de la Manouba, CP 2010</span>
+                <span className="text-gray-300 text-sm">ENIS, Campus Universitaire de la Manouba, CP 2010, La Manouba - Tunis</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone size={16} className="text-primary" />
-                <span className="text-gray-300 text-sm">(+216) 25 80 61 90</span>
+                <a href="tel:+21625806190" className="text-gray-300 text-sm hover:text-primary transition-colors">(+216) 25 80 61 90</a>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail size={16} className="text-primary" />
-                <span className="text-gray-300 text-sm">contact@atia.org.tn</span>
+                <a href="mailto:contact@atia.org.tn" className="text-gray-300 text-sm hover:text-primary transition-colors">contact@atia.org.tn</a>
               </div>
             </div>
           </div>
