@@ -1,100 +1,112 @@
-"use client"
-import { useState, useEffect, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/image"
-import logo from "@/public/images/logo.png"
+"use client";
+import { useState, useEffect, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import logo from "@/public/images/logo.png";
+import Link from "next/link";
 
-export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState("partners")
-  const menuRef = useRef<HTMLDivElement | null>(null)
+export function Header({
+  adminMode = false,
+  authMode = false,
+}: {
+  adminMode?: boolean;
+  authMode?: boolean;
+}) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("partners");
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   // Handle click outside to close menu
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsMenuOpen(false)
+        setIsMenuOpen(false);
       }
-    }
-    document.addEventListener("mousedown", handleClickOutside)
+    };
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Improved smooth scroll to section handler
   const handleScrollToSection = (id: string) => {
     // Close menu immediately for better UX
-    setIsMenuOpen(false)
-    
+    setIsMenuOpen(false);
+
     // Small delay to ensure menu animation doesn't interfere
     setTimeout(() => {
-      const section = document.getElementById(id)
+      const section = document.getElementById(id);
       if (section) {
-        const headerHeight = 100 // Adjust this to match your actual header height
-        const elementPosition = section.offsetTop
-        const offsetPosition = elementPosition - headerHeight
+        const headerHeight = 100; // Adjust this to match your actual header height
+        const elementPosition = section.offsetTop;
+        const offsetPosition = elementPosition - headerHeight;
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: "smooth"
-        })
+          behavior: "smooth",
+        });
       }
-    }, 50)
-  }
+    }, 50);
+  };
 
   // Advanced section detection logic
   useEffect(() => {
     const handleScroll = () => {
-      const sections = Array.from(document.querySelectorAll("section[id]")) as HTMLElement[]
-      if (sections.length === 0) return
-      
-      const scrollPos = window.scrollY + 150 // Offset for fixed header
+      const sections = Array.from(
+        document.querySelectorAll("section[id]")
+      ) as HTMLElement[];
+      if (sections.length === 0) return;
 
-      let currentSection = sections[0].id
+      const scrollPos = window.scrollY + 150; // Offset for fixed header
+
+      let currentSection = sections[0].id;
 
       sections.forEach((section) => {
-        const sectionTop = section.offsetTop
-        const sectionHeight = section.offsetHeight
-        
-        if (scrollPos >= sectionTop - 200 && scrollPos < sectionTop + sectionHeight - 200) {
-          currentSection = section.id
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+
+        if (
+          scrollPos >= sectionTop - 200 &&
+          scrollPos < sectionTop + sectionHeight - 200
+        ) {
+          currentSection = section.id;
         }
-      })
+      });
 
       // Special handling for bottom of page
-      const scrollBottom = window.innerHeight + window.scrollY
-      const pageHeight = document.documentElement.scrollHeight
+      const scrollBottom = window.innerHeight + window.scrollY;
+      const pageHeight = document.documentElement.scrollHeight;
 
       if (pageHeight - scrollBottom < 100) {
-        const lastSection = sections[sections.length - 1]
+        const lastSection = sections[sections.length - 1];
         if (lastSection) {
-          currentSection = lastSection.id
+          currentSection = lastSection.id;
         }
       }
 
-      setActiveSection(currentSection)
-    }
+      setActiveSection(currentSection);
+    };
 
     // Throttled scroll handler for better performance
-    let ticking = false
+    let ticking = false;
     const throttledHandleScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          handleScroll()
-          ticking = false
-        })
-        ticking = true
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
       }
-    }
+    };
 
-    window.addEventListener("scroll", throttledHandleScroll)
-    handleScroll() // Initial call
+    window.addEventListener("scroll", throttledHandleScroll);
+    handleScroll(); // Initial call
 
-    return () => window.removeEventListener("scroll", throttledHandleScroll)
-  }, [])
+    return () => window.removeEventListener("scroll", throttledHandleScroll);
+  }, []);
 
   const menuItems = [
     { name: "Partenaires", href: "#partners", id: "partners" },
@@ -104,15 +116,46 @@ export function Header() {
     { name: "Événements", href: "#events", id: "events" },
     { name: "Bureau Exécutif", href: "#team", id: "team" },
     { name: "Adhésion", href: "#membership", id: "membership" },
-  ]
+  ];
+
+  // If adminMode, show admin nav; if authMode, show minimal nav; else show default nav
+  if (adminMode) {
+    return (
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white text-primary shadow-md">
+        <div className="container py-2 flex items-center justify-between">
+          <Image src={logo} alt="Logo" width={45} height={45} />
+          <Link href="/">
+            <Button className="cursor-pointer bg-white text-primary border border-primary hover:bg-primary hover:text-white">
+              Retour au site
+            </Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+  if (authMode) {
+    return (
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white text-primary shadow-md">
+        <div className="container py-2 flex items-center justify-between">
+          <Image src={logo} alt="Logo" width={45} height={45} />
+          <span className="font-bold text-lg">Connexion ATIA</span>
+          <Link href="/">
+            <Button className="cursor-pointer bg-white text-primary border border-primary hover:bg-primary hover:text-white">
+              Retour au site
+            </Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-      <div className="container py-3">
+      <div className="container py-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
           {/* <div className="flex items-center"> */}
-            <Image src={logo} alt="Logo" width={45} height={45} />
+          <Image src={logo} alt="Logo" width={45} height={45} />
           {/* </div> */}
 
           {/* Desktop Navigation */}
@@ -140,13 +183,12 @@ export function Header() {
                 )}
               </div>
             ))}
-            
-            
+
             <div className="relative">
-              <Button 
+              <Button
                 className={`border border-black bg-transparent group hover:bg-white hover:border-primary hover:text-primary cursor-pointer text-black font-semibold ${
-                    activeSection === "contact" ? "border-primary" : ""
-                  }`}
+                  activeSection === "contact" ? "border-primary" : ""
+                }`}
                 onClick={() => handleScrollToSection("contact")}
               >
                 <span
@@ -198,26 +240,24 @@ export function Header() {
                   </motion.button>
                 ))}
                 <motion.button
-                    key="contact"                    
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 8 * 0.1 }}
-                 
-                  onClick={() => handleScrollToSection("contact")}
-                  >
-                     <Button 
-                  className="bg-primary hover:bg-orange-700 text-white w-full mt-4 cursor-pointer"
+                  key="contact"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 8 * 0.1 }}
                   onClick={() => handleScrollToSection("contact")}
                 >
-                  Contact
-                </Button>
-                  </motion.button>
-              
+                  <Button
+                    className="bg-primary hover:bg-orange-700 text-white w-full mt-4 cursor-pointer"
+                    onClick={() => handleScrollToSection("contact")}
+                  >
+                    Contact
+                  </Button>
+                </motion.button>
               </nav>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
     </div>
-  )
+  );
 }
