@@ -42,6 +42,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { EventStatus } from "@prisma/client";
+import Link from "next/link";
 interface Event {
   id: string;
   title: string;
@@ -75,6 +76,7 @@ export default function AdminEventsPage() {
   const { data: session, status } = useSession();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
+  const [createLoading, setCreateLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingEvent, setEditingEvent] = useState<Event | null>(null);
   const [formData, setFormData] = useState({
@@ -126,9 +128,14 @@ export default function AdminEventsPage() {
           <h1 className="text-2xl font-bold text-red-600 mb-4">
             Accès non autorisé
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 mb-4">
             Vous devez être administrateur pour accéder à cette page.
           </p>
+          <Link href="/auth/signin">
+            <Button className="bg-primary hover:bg-primary/80 text-white cursor-pointer">
+              Authentifier
+            </Button>
+          </Link>
         </div>
       </div>
     );
@@ -136,7 +143,7 @@ export default function AdminEventsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setCreateLoading(true);
     try {
       const url = editingEvent
         ? `/api/events/${editingEvent.id}`
@@ -156,6 +163,8 @@ export default function AdminEventsPage() {
       setIsDialogOpen(false);
     } catch (error) {
       console.error("Error saving event:", error);
+    } finally {
+      setCreateLoading(false);
     }
   };
 
@@ -211,8 +220,8 @@ export default function AdminEventsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container py-32 mx-auto ">
+    <div className=" min-h-screen bg-gray-50">
+      <div className="container py-28 mx-auto ">
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">
@@ -409,8 +418,13 @@ export default function AdminEventsPage() {
                   <Button
                     type="submit"
                     className="bg-secondary hover:bg-secondary/80 text-white cursor-pointer"
+                    disabled={createLoading}
                   >
-                    {editingEvent ? "Mettre à jour" : "Créer"}
+                    {createLoading ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      editingEvent ? "Mettre à jour" : "Créer"
+                    )}
                   </Button>
                 </div>
               </form>

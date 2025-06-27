@@ -1,11 +1,12 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 
 export function Header({
   adminMode = false,
@@ -17,6 +18,12 @@ export function Header({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("partners");
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const { data: session, status } = useSession();
+
+  // Handle logout
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/auth/signin" });
+  };
 
   // Handle click outside to close menu
   useEffect(() => {
@@ -124,11 +131,22 @@ export function Header({
       <div className="fixed top-0 left-0 right-0 z-50 bg-white text-primary shadow-md">
         <div className="container py-2 flex items-center justify-between">
           <Image src={logo} alt="Logo" width={45} height={45} />
-          <Link href="/">
-            <Button className="cursor-pointer bg-white text-primary border border-primary hover:bg-primary hover:text-white">
-              Retour au site
-            </Button>
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/">
+              <Button className="cursor-pointer bg-white text-primary border border-primary hover:bg-primary hover:text-white">
+                Retour au site
+              </Button>
+            </Link>
+            {session && (
+              <Button
+                onClick={handleLogout}
+                className="cursor-pointer bg-red-600 text-white border border-red-600 hover:bg-red-700 hover:border-red-700"
+              >
+                <LogOut size={16} className="mr-2" />
+                Déconnexion
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -138,12 +156,22 @@ export function Header({
       <div className="fixed top-0 left-0 right-0 z-50 bg-white text-primary shadow-md">
         <div className="container py-2 flex items-center justify-between">
           <Image src={logo} alt="Logo" width={45} height={45} />
-          <span className="font-bold text-lg">Connexion ATIA</span>
-          <Link href="/">
-            <Button className="cursor-pointer bg-white text-primary border border-primary hover:bg-primary hover:text-white">
-              Retour au site
-            </Button>
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/">
+              <Button className="cursor-pointer bg-white text-primary border border-primary hover:bg-primary hover:text-white">
+                Retour au site
+              </Button>
+            </Link>
+            {session && (
+              <Button
+                onClick={handleLogout}
+                className="cursor-pointer bg-red-600 text-white border border-red-600 hover:bg-red-700 hover:border-red-700"
+              >
+                <LogOut size={16} className="mr-2" />
+                Déconnexion
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -200,6 +228,17 @@ export function Header({
                 </span>
               </Button>
             </div>
+
+            {/* Logout button for authenticated users */}
+            {session && (
+              <Button
+                onClick={handleLogout}
+                className="cursor-pointer bg-red-600 text-white border border-red-600 hover:bg-red-700 hover:border-red-700"
+              >
+                <LogOut size={16} className="mr-2" />
+                Déconnexion
+              </Button>
+            )}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -253,6 +292,22 @@ export function Header({
                     Contact
                   </Button>
                 </motion.button>
+
+                {/* Logout button for authenticated users in mobile menu */}
+                {session && (
+                  <motion.button
+                    key="logout"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 9 * 0.1 }}
+                    onClick={handleLogout}
+                  >
+                    <Button className="bg-red-600 hover:bg-red-700 text-white w-full mt-4 cursor-pointer">
+                      <LogOut size={16} className="mr-2" />
+                      Déconnexion
+                    </Button>
+                  </motion.button>
+                )}
               </nav>
             </motion.div>
           )}

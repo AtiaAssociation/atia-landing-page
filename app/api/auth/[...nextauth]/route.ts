@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 const prisma = new PrismaClient();
 
@@ -10,7 +11,7 @@ export const authOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        email: { label: "Emaillll", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials: any) {
@@ -35,6 +36,7 @@ export const authOptions = {
             id: user.id,
             email: user.email,
             name: user.name ?? undefined,
+            username: undefined,
             role: user.role,
           };
         } catch (error) {
@@ -44,6 +46,7 @@ export const authOptions = {
       },
     }),
   ],
+  adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt" as const,
@@ -65,7 +68,7 @@ export const authOptions = {
   },
   pages: {
     signIn: "/auth/signin",
-    error: "/auth/error",
+    // error: "/auth/error",
   },
 };
 

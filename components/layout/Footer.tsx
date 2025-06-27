@@ -11,7 +11,7 @@ export function Footer({
 }) {
   if (adminMode) {
     return (
-      <footer className="bg-blue-900 text-white py-4 text-center mt-8">
+      <footer className="bg-gray-900 text-white py-4 text-center mt-8">
         <span>Admin &copy; {new Date().getFullYear()} ATIA</span>
       </footer>
     );
