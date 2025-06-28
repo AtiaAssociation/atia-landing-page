@@ -27,6 +27,8 @@ export const eventSchema = z.object({
     .max(100, "Le champ participants est trop long")
     .optional(),
   imageUrl: z.string().url("URL d'image invalide").optional().or(z.literal("")),
+  public_id: z.string().optional(),
+  link: z.string().url("URL invalide").optional().or(z.literal("")),
   featured: z.boolean().default(false),
   gradient: z.string().optional(),
   published: z.boolean().default(false),

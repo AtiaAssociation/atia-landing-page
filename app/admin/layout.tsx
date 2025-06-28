@@ -5,6 +5,7 @@ import SessionProviderWrapper from "@/components/providers/SessionProviderWrappe
 // Import custom admin header/footer if available, else fallback
 import { Header as AdminHeader } from "@/components/layout/Header";
 import { Footer as AdminFooter } from "@/components/layout/Footer";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function AdminLayout({
           <AdminHeader adminMode />
           {children}
           <AdminFooter adminMode />
+          <Toaster />
         </SessionProviderWrapper>
       </body>
     </html>

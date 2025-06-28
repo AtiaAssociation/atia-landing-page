@@ -13,19 +13,58 @@ import garage from "@/public/images/partners/garage.png";
 
 export function PartnersSection() {
   const partners = [
-    { name: "INFACTORY", logo: factory },
-    { name: "GARAGE", logo: garage },
-    { name: "Université de Carthage", logo: uni },
-    { name: "CERT", logo: ccft },
-    { name: "Bank", logo: bank },
-    { name: "GIZ", logo: giz },
-    { name: "STARTUP", logo: startup },
+    {
+      name: "INFACTORY",
+      logo: factory,
+      url: "https://novationaccelerator.com/ai-factory/",
+      description: "Centre d'innovation et de fabrication numérique",
+    },
+    {
+      name: "GARAGE",
+      logo: garage,
+      url: "https://novationaccelerator.com/ai-garage/",
+      description: "Espace de coworking et d'innovation",
+    },
+    {
+      name: "Université de la Manouba",
+      logo: uni,
+      url: "https://uma.rnu.tn/",
+      description: "Université de la Manouba",
+    },
+    {
+      name: "CERT",
+      logo: ccft,
+      url: "https://cc-ct.ca/",
+      description: "Centre d'études et de recherches en télécommunications",
+    },
+    {
+      name: "AttijariBank",
+      logo: bank,
+      url: "https://www.attijaribank.com.tn/fr",
+      description: "AttijariBank",
+    },
+    {
+      name: "GIZ",
+      logo: giz,
+      url: "https://tunis.diplo.de/tn-fr/deutschland-und-tunesien/05-WirtschaftlicheZusammenarbeitundEntwicklung/-/2345098",
+      description: "Coopération allemande pour le développement",
+    },
+    {
+      name: "STARTUP VILLAGE",
+      logo: startup,
+      url: "https://www.startupvillage.tn/",
+      description: "STARTUP VILLAGE",
+    },
   ];
 
   // Duplicate partners for seamless loop
   const duplicatedPartners = [...partners, ...partners];
 
   const [isHovered, setIsHovered] = useState(false);
+
+  const handlePartnerClick = (url: string) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <section id="partners" className="   overflow-hidden">
@@ -71,7 +110,10 @@ export function PartnersSection() {
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <div className="flex flex-col items-center justify-center h-full rounded-lg transition-all duration-300">
+                  <div
+                    onClick={() => handlePartnerClick(partner.url)}
+                    className="flex flex-col items-center justify-center h-full rounded-lg transition-all duration-300 cursor-pointer"
+                  >
                     <Image
                       src={partner.logo}
                       alt={partner.name}

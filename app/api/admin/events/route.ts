@@ -6,15 +6,17 @@ const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
   try {
-    const session = await requireAdmin();
+    await requireAdmin();
+
     const events = await prisma.event.findMany({
-      orderBy: { createdAt: "desc" },
+      orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
       include: {
         author: {
           select: { name: true, email: true },
         },
       },
     });
+
     return NextResponse.json(events);
   } catch (error) {
     console.error("Error fetching admin events:", error);

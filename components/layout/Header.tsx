@@ -229,16 +229,7 @@ export function Header({
               </Button>
             </div>
 
-            {/* Logout button for authenticated users */}
-            {session && (
-              <Button
-                onClick={handleLogout}
-                className="cursor-pointer bg-red-600 text-white border border-red-600 hover:bg-red-700 hover:border-red-700"
-              >
-                <LogOut size={16} className="mr-2" />
-                Déconnexion
-              </Button>
-            )}
+         
           </nav>
 
           {/* Mobile Menu Button */}
@@ -293,21 +284,7 @@ export function Header({
                   </Button>
                 </motion.button>
 
-                {/* Logout button for authenticated users in mobile menu */}
-                {session && (
-                  <motion.button
-                    key="logout"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 9 * 0.1 }}
-                    onClick={handleLogout}
-                  >
-                    <Button className="bg-red-600 hover:bg-red-700 text-white w-full mt-4 cursor-pointer">
-                      <LogOut size={16} className="mr-2" />
-                      Déconnexion
-                    </Button>
-                  </motion.button>
-                )}
+             
               </nav>
             </motion.div>
           )}

@@ -29,6 +29,8 @@ model Event {
   location    String
   attendees   String?
   imageUrl    String?
+  public_id   String?
+  link        String?
   featured    Boolean  @default(false)
   gradient    String?
   published   Boolean  @default(false)
