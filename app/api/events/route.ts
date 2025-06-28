@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { requireAdmin } from "@/lib/auth";
+import { eventSchema } from "@/lib/validations/event";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -26,43 +26,29 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN") {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
   try {
+    const session = await requireAdmin();
     const body = await req.json();
-    const {
-      title,
-      subtitle,
-      description,
-      startDate,
-      endDate,
-      location,
-      attendees,
-      imageUrl,
-      featured,
-      gradient,
-      published,
-    } = body;
+
+    // Validate the request body
+    const validatedData = eventSchema.parse(body);
+
     const event = await prisma.event.create({
       data: {
-        title,
-        subtitle,
-        description,
-        startDate: new Date(startDate),
-        endDate: endDate ? new Date(endDate) : null,
-        location,
-        attendees,
-        imageUrl,
-        featured: featured || false,
-        gradient,
-        published: published || false,
+        ...validatedData,
+        startDate: new Date(validatedData.startDate),
+        endDate: validatedData.endDate ? new Date(validatedData.endDate) : null,
         authorId: session.user.id,
       },
     });
     return NextResponse.json(event, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
+    if (error.name === "ZodError") {
+      return NextResponse.json(
+        { error: "Validation failed", details: error.errors },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
       { error: "Failed to create event" },
       { status: 500 }
