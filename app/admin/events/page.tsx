@@ -62,6 +62,7 @@ import {
 } from "lucide-react";
 import { EventStatus } from "@prisma/client";
 import Link from "next/link";
+import { eventSchema, type EventFormData } from "@/lib/validations/event";
 
 interface Event {
   id: string;
@@ -111,7 +112,7 @@ export default function AdminEventsPage() {
   const [uploadSuccess, setUploadSuccess] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<EventFormData>({
     title: "",
     subtitle: "",
     description: "",
@@ -148,26 +149,86 @@ export default function AdminEventsPage() {
     }
   };
 
-  // Validation function
+  // Enhanced validation function using Zod schema
   const validateForm = () => {
-    const errors: Record<string, string> = {};
+    try {
+      // Clean up form data for validation
+      const dataToValidate = {
+        ...formData,
+        imageUrl: formData.imageUrl || "",
+        link: formData.link || "",
+        subtitle: formData.subtitle || undefined,
+        attendees: formData.attendees || undefined,
+        endDate: formData.endDate || undefined,
+      };
 
-    if (!formData.title.trim()) errors.title = "Le titre est requis";
-    if (!formData.description.trim())
-      errors.description = "La description est requise";
-    if (!formData.startDate) errors.startDate = "La date de début est requise";
-    if (!formData.location.trim()) errors.location = "Le lieu est requis";
+      eventSchema.parse(dataToValidate);
+      setFormErrors({});
+      return true;
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const errors: Record<string, string> = {};
+        error.errors.forEach((err: any) => {
+          const field = err.path.join(".");
+          errors[field] = err.message;
+        });
+        setFormErrors(errors);
 
-    if (
-      formData.endDate &&
-      formData.startDate &&
-      formData.endDate < formData.startDate
-    ) {
-      errors.endDate = "La date de fin doit être après la date de début";
+        // Show toast with validation errors
+        toast({
+          title: "Erreurs de validation",
+          description: "Veuillez corriger les erreurs dans le formulaire.",
+          variant: "destructive",
+        });
+      }
+      return false;
     }
+  };
 
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
+  // Real-time validation on field change
+  const validateField = (field: string, value: any) => {
+    try {
+      const dataToValidate = {
+        ...formData,
+        [field]: value,
+        imageUrl: formData.imageUrl || "",
+        link: formData.link || "",
+        subtitle: formData.subtitle || undefined,
+        attendees: formData.attendees || undefined,
+        endDate: formData.endDate || undefined,
+      };
+
+      eventSchema.parse(dataToValidate);
+
+      // Clear error for this field if validation passes
+      setFormErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const fieldError = error.errors.find(
+          (err: any) => err.path.join(".") === field
+        );
+        if (fieldError) {
+          setFormErrors((prev) => ({
+            ...prev,
+            [field]: fieldError.message,
+          }));
+        }
+      }
+    }
+  };
+
+  // Enhanced form change handler with validation
+  const handleFormChange = (field: string, value: any) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+
+    // Validate field after a short delay to avoid too frequent validation
+    setTimeout(() => {
+      validateField(field, value);
+    }, 300);
   };
 
   // Image upload function
@@ -312,15 +373,31 @@ export default function AdminEventsPage() {
         : "/api/events";
       const method = editingEvent ? "PUT" : "POST";
 
-      console.log("formData", formData);
-
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) throw new Error("Failed to save event");
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (errorData.details) {
+          // Handle validation errors from server
+          const errors: Record<string, string> = {};
+          errorData.details.forEach((err: any) => {
+            errors[err.field] = err.message;
+          });
+          setFormErrors(errors);
+          toast({
+            title: "Erreurs de validation",
+            description: "Veuillez corriger les erreurs dans le formulaire.",
+            variant: "destructive",
+          });
+          return;
+        }
+        throw new Error(errorData.error || "Failed to save event");
+      }
+
       await fetchEvents();
 
       toast({
@@ -534,14 +611,18 @@ export default function AdminEventsPage() {
                           id="title"
                           value={formData.title}
                           onChange={(e) =>
-                            setFormData({ ...formData, title: e.target.value })
+                            handleFormChange("title", e.target.value)
                           }
                           className={`mt-1 ${
-                            formErrors.title ? "border-red-500" : ""
+                            formErrors.title
+                              ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : ""
                           }`}
+                          placeholder="Titre de l'événement"
                         />
                         {formErrors.title && (
-                          <p className="text-red-500 text-sm mt-1">
+                          <p className="text-red-500 text-sm mt-1 flex items-center">
+                            <AlertCircle className="w-4 h-4 mr-1" />
                             {formErrors.title}
                           </p>
                         )}
@@ -553,14 +634,21 @@ export default function AdminEventsPage() {
                           id="subtitle"
                           value={formData.subtitle}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              subtitle: e.target.value,
-                            })
+                            handleFormChange("subtitle", e.target.value)
                           }
-                          className="mt-1"
+                          className={`mt-1 ${
+                            formErrors.subtitle
+                              ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : ""
+                          }`}
                           placeholder="Ajoutez un sous-titre descriptif (optionnel)"
                         />
+                        {formErrors.subtitle && (
+                          <p className="text-red-500 text-sm mt-1 flex items-center">
+                            <AlertCircle className="w-4 h-4 mr-1" />
+                            {formErrors.subtitle}
+                          </p>
+                        )}
                       </div>
 
                       <div className="md:col-span-2">
@@ -569,19 +657,19 @@ export default function AdminEventsPage() {
                           id="description"
                           value={formData.description}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              description: e.target.value,
-                            })
+                            handleFormChange("description", e.target.value)
                           }
                           rows={4}
                           className={`mt-1 ${
-                            formErrors.description ? "border-red-500" : ""
+                            formErrors.description
+                              ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : ""
                           }`}
                           placeholder="Décrivez votre événement en détail..."
                         />
                         {formErrors.description && (
-                          <p className="text-red-500 text-sm mt-1">
+                          <p className="text-red-500 text-sm mt-1 flex items-center">
+                            <AlertCircle className="w-4 h-4 mr-1" />
                             {formErrors.description}
                           </p>
                         )}
@@ -601,17 +689,17 @@ export default function AdminEventsPage() {
                           type="date"
                           value={formData.startDate}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              startDate: e.target.value,
-                            })
+                            handleFormChange("startDate", e.target.value)
                           }
                           className={`mt-1 ${
-                            formErrors.startDate ? "border-red-500" : ""
+                            formErrors.startDate
+                              ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : ""
                           }`}
                         />
                         {formErrors.startDate && (
-                          <p className="text-red-500 text-sm mt-1">
+                          <p className="text-red-500 text-sm mt-1 flex items-center">
+                            <AlertCircle className="w-4 h-4 mr-1" />
                             {formErrors.startDate}
                           </p>
                         )}
@@ -624,17 +712,17 @@ export default function AdminEventsPage() {
                           type="date"
                           value={formData.endDate}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              endDate: e.target.value,
-                            })
+                            handleFormChange("endDate", e.target.value)
                           }
                           className={`mt-1 ${
-                            formErrors.endDate ? "border-red-500" : ""
+                            formErrors.endDate
+                              ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : ""
                           }`}
                         />
                         {formErrors.endDate && (
-                          <p className="text-red-500 text-sm mt-1">
+                          <p className="text-red-500 text-sm mt-1 flex items-center">
+                            <AlertCircle className="w-4 h-4 mr-1" />
                             {formErrors.endDate}
                           </p>
                         )}
@@ -646,18 +734,18 @@ export default function AdminEventsPage() {
                           id="location"
                           value={formData.location}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              location: e.target.value,
-                            })
+                            handleFormChange("location", e.target.value)
                           }
                           className={`mt-1 ${
-                            formErrors.location ? "border-red-500" : ""
+                            formErrors.location
+                              ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : ""
                           }`}
                           placeholder="Adresse complète ou nom du lieu"
                         />
                         {formErrors.location && (
-                          <p className="text-red-500 text-sm mt-1">
+                          <p className="text-red-500 text-sm mt-1 flex items-center">
+                            <AlertCircle className="w-4 h-4 mr-1" />
                             {formErrors.location}
                           </p>
                         )}
@@ -669,14 +757,21 @@ export default function AdminEventsPage() {
                           id="attendees"
                           value={formData.attendees}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              attendees: e.target.value,
-                            })
+                            handleFormChange("attendees", e.target.value)
                           }
                           placeholder="ex: 200+ participants"
-                          className="mt-1"
+                          className={`mt-1 ${
+                            formErrors.attendees
+                              ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : ""
+                          }`}
                         />
+                        {formErrors.attendees && (
+                          <p className="text-red-500 text-sm mt-1 flex items-center">
+                            <AlertCircle className="w-4 h-4 mr-1" />
+                            {formErrors.attendees}
+                          </p>
+                        )}
                       </div>
 
                       <div className="md:col-span-2">
@@ -686,14 +781,21 @@ export default function AdminEventsPage() {
                           type="url"
                           value={formData.link}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              link: e.target.value,
-                            })
+                            handleFormChange("link", e.target.value)
                           }
                           placeholder="https://example.com/event-details"
-                          className="mt-1"
+                          className={`mt-1 ${
+                            formErrors.link
+                              ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : ""
+                          }`}
                         />
+                        {formErrors.link && (
+                          <p className="text-red-500 text-sm mt-1 flex items-center">
+                            <AlertCircle className="w-4 h-4 mr-1" />
+                            {formErrors.link}
+                          </p>
+                        )}
                         <p className="text-sm text-gray-500 mt-1">
                           Lien optionnel vers une page avec plus d'informations
                           sur l'événement
@@ -799,14 +901,21 @@ export default function AdminEventsPage() {
                           type="url"
                           value={formData.imageUrl}
                           onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              imageUrl: e.target.value,
-                            })
+                            handleFormChange("imageUrl", e.target.value)
                           }
                           placeholder="https://example.com/image.jpg"
-                          className="mt-1"
+                          className={`mt-1 ${
+                            formErrors.imageUrl
+                              ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : ""
+                          }`}
                         />
+                        {formErrors.imageUrl && (
+                          <p className="text-red-500 text-sm mt-1 flex items-center">
+                            <AlertCircle className="w-4 h-4 mr-1" />
+                            {formErrors.imageUrl}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -821,7 +930,7 @@ export default function AdminEventsPage() {
                         <Select
                           value={formData.gradient}
                           onValueChange={(value) =>
-                            setFormData({ ...formData, gradient: value })
+                            handleFormChange("gradient", value)
                           }
                         >
                           <SelectTrigger className="mt-1">
@@ -851,7 +960,7 @@ export default function AdminEventsPage() {
                             id="featured"
                             checked={formData.featured}
                             onCheckedChange={(checked) =>
-                              setFormData({ ...formData, featured: checked })
+                              handleFormChange("featured", checked)
                             }
                           />
                           <Label htmlFor="featured">Événement principal</Label>
@@ -862,7 +971,7 @@ export default function AdminEventsPage() {
                             id="published"
                             checked={formData.published}
                             onCheckedChange={(checked) =>
-                              setFormData({ ...formData, published: checked })
+                              handleFormChange("published", checked)
                             }
                           />
                           <Label htmlFor="published">Publié</Label>
@@ -870,6 +979,26 @@ export default function AdminEventsPage() {
                       </div>
                     </div>
                   </div>
+
+                  {/* Form Errors Summary */}
+                  {Object.keys(formErrors).length > 0 && (
+                    <Alert className="border-red-200 bg-red-50">
+                      <AlertCircle className="h-4 w-4 text-red-600" />
+                      <AlertDescription className="text-red-700">
+                        <div className="font-medium mb-2">
+                          Erreurs de validation :
+                        </div>
+                        <ul className="list-disc list-inside space-y-1">
+                          {Object.entries(formErrors).map(([field, error]) => (
+                            <li key={field} className="text-sm">
+                              <span className="font-medium">{field}:</span>{" "}
+                              {error}
+                            </li>
+                          ))}
+                        </ul>
+                      </AlertDescription>
+                    </Alert>
+                  )}
 
                   <DialogFooter className="flex justify-end space-x-2 pt-6 border-t">
                     <Button
@@ -882,7 +1011,9 @@ export default function AdminEventsPage() {
                     <Button
                       type="submit"
                       className="bg-secondary hover:bg-secondary/80 text-white cursor-pointer"
-                      disabled={createLoading}
+                      disabled={
+                        createLoading || Object.keys(formErrors).length > 0
+                      }
                     >
                       {createLoading ? (
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
